@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXORA — Smart Investment Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F1F4F9;
+    --canvas:#E4E9F1;
+    --surface:#FFFFFF;
+    --surface-2:#F6F8FC;
+    --text:#0B1220;
+    --text-muted:#667085;
+    --text-faint:#9AA5B8;
+    --border:#E7EAF1;
+    --navy:#0B1220;
+    --navy-soft:#141E33;
+    --primary:#2563EB;
+    --primary-soft:#E8EFFE;
+    --success:#22C55E;
+    --success-soft:#E7F9EE;
+    --warning:#F59E0B;
+    --warning-soft:#FEF3DF;
+    --violet:#7C3AED;
+    --violet-soft:#F0E9FE;
+    --danger:#EF4444;
+    --shadow: 0 1px 2px rgba(11,18,32,.04), 0 8px 24px -12px rgba(11,18,32,.12);
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:10px;
+    font-family: 'Vazirmatn','Segoe UI',Tahoma,sans-serif;
+  }
+  :root[data-theme="dark"]{
+    --bg:#0B1220;
+    --canvas:#070C16;
+    --surface:#121B2D;
+    --surface-2:#0F1728;
+    --text:#EAF0FB;
+    --text-muted:#93A0BC;
+    --text-faint:#5E6C8A;
+    --border:#22304A;
+    --navy:#060B15;
+    --navy-soft:#101A2C;
+    --primary-soft:#182541;
+    --success-soft:#12281C;
+    --warning-soft:#2A2010;
+    --violet-soft:#221B3B;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0B1220;
+      --canvas:#070C16;
+      --surface:#121B2D;
+      --surface-2:#0F1728;
+      --text:#EAF0FB;
+      --text-muted:#93A0BC;
+      --text-faint:#5E6C8A;
+      --border:#22304A;
+      --navy:#060B15;
+      --navy-soft:#101A2C;
+      --primary-soft:#182541;
+      --success-soft:#12281C;
+      --warning-soft:#2A2010;
+      --violet-soft:#221B3B;
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--canvas);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+  }
+  .app{
+    width:100%;
+    max-width:480px;
+    min-height:100vh;
+    background:var(--bg);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    overflow-x:hidden;
+  }
+
+  /* ---------- Splash ---------- */
+  #splash{
+    position:fixed;inset:0;z-index:999;
+    background:linear-gradient(160deg,var(--navy) 0%, #0E1830 100%);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;
+    transition:opacity .5s ease, visibility .5s ease;
+  }
+  #splash.hide{opacity:0;visibility:hidden;pointer-events:none;}
+  .splash-mark{
+    width:64px;height:64px;border-radius:18px;
+    background:linear-gradient(135deg,#2563EB,#1D4ED8);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 12px 30px -8px rgba(37,99,235,.6);
+    animation:pop .6s cubic-bezier(.2,.8,.2,1);
+  }
+  .splash-mark svg{width:32px;height:32px;}
+  .splash-word{color:#fff;font-weight:800;font-size:22px;letter-spacing:.5px;animation:fadeUp .5s ease .15s both;}
+  .splash-sub{color:#8AA0C9;font-size:12.5px;animation:fadeUp .5s ease .25s both;}
+  @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+  @keyframes fadeUp{from{transform:translateY(6px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+  /* ---------- Top header (brand) ---------- */
+  .brandbar{
+    padding:18px 20px 14px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(135deg,#2563EB,#1D4ED8);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .brand-mark svg{width:18px;height:18px;}
+  .brand-name{font-weight:800;font-size:16px;letter-spacing:.3px;color:var(--text);line-height:1;}
+  .brand-tagline{font-size:10.5px;color:var(--text-faint);letter-spacing:.2px;margin-top:2px;direction:ltr;text-align:right;}
+  .theme-toggle{
+    width:34px;height:34px;border-radius:10px;background:var(--surface);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--text-muted);cursor:pointer;
+  }
+  .theme-toggle svg{width:16px;height:16px;}
+
+  /* ---------- Scroll area ---------- */
+  .screens{flex:1;position:relative;padding-bottom:86px;}
+  .screen{display:none;padding:0 20px 24px;animation:screenIn .28s ease;}
+  .screen.active{display:block;}
+  @keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+  /* sub-screen header with back button */
+  .subhead{display:flex;align-items:center;gap:10px;padding:14px 20px 6px;}
+  .backbtn{
+    width:32px;height:32px;border-radius:9px;background:var(--surface);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--text);cursor:pointer;flex-shrink:0;
+  }
+  .backbtn svg{width:16px;height:16px;}
+  .subhead h2{font-size:15.5px;font-weight:700;margin:0;}
+
+  /* ---------- Balance card ---------- */
+  .balance-card{
+    background:linear-gradient(150deg,var(--navy) 0%, var(--navy-soft) 100%);
+    border-radius:var(--radius-lg);
+    padding:22px 20px;
+    color:#fff;
+    box-shadow:0 14px 30px -14px rgba(6,11,21,.55);
+    position:relative;
+    overflow:hidden;
+  }
+  .balance-card::after{
+    content:"";position:absolute;left:-40px;top:-60px;width:180px;height:180px;border-radius:50%;
+    background:radial-gradient(circle, rgba(37,99,235,.35), transparent 70%);
+  }
+  .balance-label{font-size:12px;color:#93A5CC;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;direction:ltr;text-align:right}
+  .balance-amount{font-size:34px;font-weight:800;margin-top:8px;letter-spacing:.2px;position:relative;z-index:1;direction:ltr;text-align:right;}
+  .balance-amount span{font-size:16px;font-weight:600;color:#9FB2D6;margin-right:6px;}
+  .balance-sub{margin-top:4px;font-size:11.5px;color:#7C8FB8;position:relative;z-index:1;}
+
+  .stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;position:relative;z-index:1;}
+  .stat-chip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 8px;text-align:center;}
+  .stat-chip .ic{font-size:14px;}
+  .stat-chip .val{font-size:13px;font-weight:700;margin-top:4px;direction:ltr;}
+  .stat-chip .lbl{font-size:9.5px;color:#8CA0C7;margin-top:2px;}
+
+  .action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+  .action-btn{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    padding:12px;border-radius:var(--radius-md);border:none;cursor:pointer;
+    font-family:inherit;font-weight:700;font-size:13.5px;
+  }
+  .action-btn.primary{background:var(--primary);color:#fff;}
+  .action-btn.ghost{background:var(--surface);color:var(--text);border:1px solid var(--border);}
+  .action-btn.dark{background:var(--surface-2);color:var(--text);border:1px solid var(--border);}
+
+  .section-title{font-size:13.5px;font-weight:700;color:var(--text);margin:22px 2px 10px;display:flex;align-items:center;justify-content:space-between;}
+  .section-title .more{font-size:11.5px;font-weight:600;color:var(--primary);cursor:pointer;}
+
+  .quick-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .quick-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);
+    padding:14px;display:flex;flex-direction:column;gap:6px;cursor:pointer;
+  }
+  .quick-card .ic{font-size:18px;}
+  .quick-card .t{font-size:12.5px;font-weight:700;}
+  .quick-card .s{font-size:10.5px;color:var(--text-muted);}
+
+  /* ---------- Plan cards ---------- */
+  .plan-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:16px;margin-bottom:12px;position:relative;overflow:hidden;
+  }
+  .plan-top{display:flex;align-items:center;justify-content:space-between;}
+  .plan-tag{
+    display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
+    padding:5px 10px;border-radius:999px;
+  }
+  .plan-tag.starter{background:var(--success-soft);color:var(--success);}
+  .plan-tag.growth{background:var(--primary-soft);color:var(--primary);}
+  .plan-tag.premium{background:var(--violet-soft);color:var(--violet);}
+  .plan-tag.flexible{background:var(--warning-soft);color:var(--warning);}
+  .plan-dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .risk-badge{font-size:10.5px;color:var(--text-muted);background:var(--surface-2);border:1px solid var(--border);padding:4px 8px;border-radius:8px;}
+
+  .plan-name{font-size:15px;font-weight:800;margin-top:12px;}
+  .plan-desc{font-size:12px;color:var(--text-muted);margin-top:3px;line-height:1.7;}
+
+  .plan-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+  .meta-item{background:var(--surface-2);border-radius:10px;padding:9px 10px;}
+  .meta-item .k{font-size:10px;color:var(--text-faint);}
+  .meta-item .v{font-size:12.5px;font-weight:700;margin-top:2px;direction:ltr;text-align:right;}
+
+  .plan-cta{
+    width:100%;margin-top:14px;padding:12px;border:none;border-radius:12px;
+    background:var(--primary);color:#fff;font-family:inherit;font-weight:700;font-size:13.5px;cursor:pointer;
+  }
+  .plan-note{font-size:10.5px;color:var(--text-faint);margin-top:8px;line-height:1.6;}
+
+  /* ---------- Invest / form screens ---------- */
+  .form-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;}
+  .field{margin-bottom:14px;}
+  .field label{font-size:12px;color:var(--text-muted);font-weight:600;display:block;margin-bottom:6px;}
+  .amount-input-wrap{
+    display:flex;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:4px 12px;
+  }
+  .amount-input-wrap input{
+    flex:1;border:none;background:transparent;font-family:inherit;font-size:20px;font-weight:700;color:var(--text);
+    padding:10px 0;outline:none;direction:ltr;text-align:right;min-width:0;
+  }
+  .amount-input-wrap .unit{font-size:12.5px;color:var(--text-muted);font-weight:700;}
+  .quick-amounts{display:flex;gap:8px;margin-top:8px;}
+  .qa-btn{flex:1;padding:8px;border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;font-size:11.5px;font-weight:600;cursor:pointer;}
+  .qa-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+  .hint{font-size:10.5px;color:var(--text-faint);margin-top:6px;}
+  .hint.err{color:var(--danger);}
+
+  .summary-list{margin-top:6px;}
+  .summary-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--border);}
+  .summary-row:last-child{border-bottom:none;}
+  .summary-row .k{font-size:12.5px;color:var(--text-muted);}
+  .summary-row .v{font-size:12.5px;font-weight:700;direction:ltr;}
+  .summary-row .v.muted{color:var(--text-faint);font-weight:600;font-size:11px;}
+
+  .disclaimer{
+    background:var(--warning-soft);border:1px solid rgba(245,158,11,.25);border-radius:10px;
+    padding:10px 12px;font-size:10.5px;color:#8A5A08;line-height:1.7;margin-top:14px;
+  }
+  :root[data-theme="dark"] .disclaimer, @media (prefers-color-scheme:dark){.disclaimer{color:#F2C069;}}
+
+  .confirm-btn{
+    width:100%;margin-top:16px;padding:14px;border:none;border-radius:13px;background:var(--primary);
+    color:#fff;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;
+  }
+  .confirm-btn:disabled{background:var(--text-faint);cursor:not-allowed;}
+  .confirm-btn.success{background:var(--success);}
+  .confirm-btn.danger{background:var(--danger);}
+
+  /* ---------- Investment / transaction list items ---------- */
+  .inv-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:10px;}
+  .inv-head{display:flex;align-items:center;justify-content:space-between;}
+  .inv-head .name{font-size:13.5px;font-weight:700;}
+  .inv-status{font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;}
+  .inv-status.active{background:var(--primary-soft);color:var(--primary);}
+  .inv-status.done{background:var(--success-soft);color:var(--success);}
+  .inv-progress{height:6px;border-radius:99px;background:var(--surface-2);margin-top:11px;overflow:hidden;}
+  .inv-progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),#3B82F6);border-radius:99px;transition:width .5s ease;}
+  .inv-foot{display:flex;justify-content:space-between;margin-top:9px;font-size:11px;color:var(--text-muted);}
+  .inv-foot b{color:var(--text);direction:ltr;}
+
+  .tx-item{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--border);}
+  .tx-item:last-child{border-bottom:none;}
+  .tx-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+  .tx-ic.dep{background:var(--success-soft);}
+  .tx-ic.wd{background:var(--warning-soft);}
+  .tx-ic.inv{background:var(--primary-soft);}
+  .tx-ic.profit{background:var(--violet-soft);}
+  .tx-mid{flex:1;min-width:0;}
+  .tx-mid .t{font-size:12.5px;font-weight:700;}
+  .tx-mid .d{font-size:10.5px;color:var(--text-faint);margin-top:1px;}
+  .tx-amt{font-size:12.5px;font-weight:800;direction:ltr;flex-shrink:0;}
+  .tx-amt.pos{color:var(--success);}
+  .tx-amt.neg{color:var(--text);}
+
+  .empty{
+    text-align:center;padding:36px 10px;color:var(--text-faint);
+  }
+  .empty .ic{font-size:30px;margin-bottom:8px;}
+  .empty .t{font-size:12.5px;font-weight:700;color:var(--text-muted);}
+  .empty .s{font-size:11px;margin-top:4px;}
+
+  /* ---------- Profile ---------- */
+  .profile-head{display:flex;align-items:center;gap:14px;padding:6px 2px 18px;}
+  .avatar{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--primary),#1D4ED8);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;flex-shrink:0;}
+  .profile-head .nm{font-size:15.5px;font-weight:800;}
+  .profile-head .id{font-size:11px;color:var(--text-faint);margin-top:2px;direction:ltr;text-align:right;}
+
+  .prof-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .prof-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:13px;}
+  .prof-card .k{font-size:10.5px;color:var(--text-muted);}
+  .prof-card .v{font-size:15px;font-weight:800;margin-top:5px;direction:ltr;text-align:right;}
+  .prof-card .v.success{color:var(--success);}
+
+  .list-row{
+    display:flex;align-items:center;justify-content:space-between;background:var(--surface);
+    border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:9px;cursor:pointer;
+  }
+  .list-row .left{display:flex;align-items:center;gap:10px;}
+  .list-row .ic{font-size:16px;}
+  .list-row .t{font-size:13px;font-weight:700;}
+  .list-row .s{font-size:10.5px;color:var(--text-faint);margin-top:1px;}
+  .list-row .chev{color:var(--text-faint);}
+
+  /* ---------- Referral ---------- */
+  .ref-hero{
+    background:linear-gradient(150deg,var(--navy),var(--navy-soft));border-radius:var(--radius-lg);padding:22px 18px;color:#fff;text-align:center;
+  }
+  .ref-hero .ic{font-size:30px;}
+  .ref-hero h3{font-size:15.5px;margin:10px 0 4px;font-weight:800;}
+  .ref-hero p{font-size:11.5px;color:#93A5CC;line-height:1.8;margin:0;padding:0 6px;}
+
+  .code-box{
+    display:flex;align-items:center;justify-content:space-between;background:var(--surface);
+    border:1.5px dashed var(--primary);border-radius:12px;padding:13px 15px;margin-top:16px;
+  }
+  .code-box .code{font-size:16px;font-weight:800;letter-spacing:1.5px;color:var(--primary);direction:ltr;}
+  .copy-btn{
+    background:var(--primary);color:#fff;border:none;border-radius:9px;padding:8px 12px;font-family:inherit;
+    font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;margin-right:10px;
+  }
+  .link-row{
+    display:flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--border);
+    border-radius:10px;padding:10px 12px;margin-top:10px;
+  }
+  .link-row span{flex:1;font-size:10.5px;color:var(--text-muted);direction:ltr;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .link-row button{background:none;border:none;color:var(--primary);font-family:inherit;font-weight:700;font-size:11px;cursor:pointer;flex-shrink:0;}
+
+  .ref-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+  .ref-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:15px;text-align:center;}
+  .ref-stat .v{font-size:20px;font-weight:800;}
+  .ref-stat .l{font-size:10.5px;color:var(--text-muted);margin-top:3px;}
+
+  .tier-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:12px 14px;margin-top:9px;}
+  .tier-row .t{font-size:12px;font-weight:700;}
+  .tier-row .s{font-size:10.5px;color:var(--text-faint);}
+  .tier-row .r{font-size:12px;font-weight:800;color:var(--success);direction:ltr;}
+
+  /* ---------- Bottom nav ---------- */
+  .navbar{
+    position:sticky;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);
+    display:flex;padding:8px 10px calc(8px + env(safe-area-inset-bottom));z-index:50;
+  }
+  .navbar.hidden{display:none;}
+  .nav-btn{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;
+    font-family:inherit;color:var(--text-faint);padding:6px 0;cursor:pointer;
+  }
+  .nav-btn .ic{font-size:19px;line-height:1;}
+  .nav-btn .lb{font-size:10px;font-weight:600;}
+  .nav-btn.active{color:var(--primary);}
+
+  /* ---------- toast ---------- */
+  #toast{
+    position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;font-size:12.5px;font-weight:600;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,.4);z-index:200;opacity:0;transition:all .25s ease;pointer-events:none;
+    max-width:86%;text-align:center;
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  #toast.err{background:var(--danger);}
+  #toast.ok{background:var(--success);}
+
+  ::selection{background:var(--primary);color:#fff;}
+  a{color:inherit;}
+  button{-webkit-tap-highlight-color:transparent;}
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="splash-mark">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 17L10 7L14 13L20 4" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="splash-word">NEXORA</div>
+  <div class="splash-sub">Smart Investment Platform</div>
+</div>
+
+<div class="app">
+
+  <div class="brandbar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 17L10 7L14 13L20 4" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">NEXORA</div>
+        <div class="brand-tagline">Smart Investment Platform</div>
+      </div>
+    </div>
+    <div class="theme-toggle" id="themeToggle">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <div class="screens">
+
+    <!-- ================= HOME ================= -->
+    <section class="screen active" data-screen="home">
+      <div class="balance-card">
+        <div class="balance-label"><span>Total Balance</span><span id="greetTag">👋</span></div>
+        <div class="balance-amount" id="balanceAmt">0.00<span>USDT</span></div>
+        <div class="balance-sub" id="greetLine">خوش آمدید</div>
+        <div class="stat-row">
+          <div class="stat-chip"><div class="ic">📈</div><div class="val" id="statProfit">0.00</div><div class="lbl">Total Profit</div></div>
+          <div class="stat-chip"><div class="ic">💰</div><div class="val" id="statInvested">0.00</div><div class="lbl">Invested</div></div>
+          <div class="stat-chip"><div class="ic">🔄</div><div class="val" id="statActive">0</div><div class="lbl">Active</div></div>
+        </div>
+        <div class="action-grid">
+          <button class="action-btn primary" onclick="go('plans')">سرمایه‌گذاری</button>
+          <button class="action-btn ghost" onclick="go('withdraw')">برداشت وجه</button>
+        </div>
+      </div>
+
+      <div class="section-title">دسترسی سریع</div>
+      <div class="quick-row">
+        <div class="quick-card" onclick="go('myinvestments')">
+          <div class="ic">📊</div>
+          <div class="t">سرمایه‌گذاری‌های من</div>
+          <div class="s">مشاهده و پیگیری بسته‌ها</div>
+        </div>
+        <div class="quick-card" onclick="go('transactions')">
+          <div class="ic">🧾</div>
+          <div class="t">تراکنش‌ها</div>
+          <div class="s">تاریخچه کامل حساب</div>
+        </div>
+        <div class="quick-card" onclick="go('deposit')">
+          <div class="ic">➕</div>
+          <div class="t">افزایش موجودی</div>
+          <div class="s">واریز آزمایشی (دمو)</div>
+        </div>
+        <div class="quick-card" onclick="go('referral')">
+          <div class="ic">🎁</div>
+          <div class="t">دعوت از دوستان</div>
+          <div class="s">دریافت پاداش معرفی</div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <span>پرتفوی فعال</span>
+        <span class="more" onclick="go('myinvestments')">مشاهده همه</span>
+      </div>
+      <div id="homeInvestPreview"></div>
+    </section>
+
+    <!-- ================= PLANS ================= -->
+    <section class="screen" data-screen="plans">
+      <div class="section-title" style="margin-top:14px;">بسته‌های سرمایه‌گذاری</div>
+      <div id="plansList"></div>
+    </section>
+
+    <!-- ================= MY INVESTMENTS ================= -->
+    <section class="screen" data-screen="myinvestments">
+      <div class="section-title" style="margin-top:14px;">سرمایه‌گذاری‌های من</div>
+      <div id="investList"></div>
+    </section>
+
+    <!-- ================= PROFILE ================= -->
+    <section class="screen" data-screen="profile">
+      <div class="profile-head" style="margin-top:10px;">
+        <div class="avatar" id="avatarLetter">N</div>
+        <div>
+          <div class="nm" id="profileName">کاربر NEXORA</div>
+          <div class="id">User ID: <span id="profileUserId">—</span></div>
+        </div>
+      </div>
+
+      <div class="prof-grid">
+        <div class="prof-card"><div class="k">Wallet</div><div class="v" id="profWallet" style="font-size:12px;">—</div></div>
+        <div class="prof-card"><div class="k">Active Plans</div><div class="v" id="profActive">0</div></div>
+        <div class="prof-card"><div class="k">Total Invested</div><div class="v" id="profInvested">0.00</div></div>
+        <div class="prof-card"><div class="k">Total Profit</div><div class="v success" id="profProfit">0.00</div></div>
+      </div>
+
+      <div class="section-title">حساب کاربری</div>
+      <div class="list-row" onclick="go('referral')">
+        <div class="left"><span class="ic">🎁</span><div><div class="t">پاداش معرفی</div><div class="s" id="profRefRewards">0.00 USDT دریافتی</div></div></div>
+        <span class="chev">‹</span>
+      </div>
+      <div class="list-row" onclick="go('transactions')">
+        <div class="left"><span class="ic">🧾</span><div><div class="t">تاریخچه تراکنش‌ها</div><div class="s">همه واریزها و برداشت‌ها</div></div></div>
+        <span class="chev">‹</span>
+      </div>
+      <div class="list-row" onclick="go('deposit')">
+        <div class="left"><span class="ic">➕</span><div><div class="t">افزایش موجودی</div><div class="s">حالت آزمایشی / دمو</div></div></div>
+        <span class="chev">‹</span>
+      </div>
+      <div class="list-row" onclick="confirmReset()">
+        <div class="left"><span class="ic">↺</span><div><div class="t">بازنشانی حساب دمو</div><div class="s">پاک کردن داده‌های آزمایشی</div></div></div>
+        <span class="chev">‹</span>
+      </div>
+    </section>
+
+    <!-- ================= REFERRAL ================= -->
+    <section class="screen" data-screen="referral">
+      <div style="margin-top:10px;">
+        <div class="ref-hero">
+          <div class="ic">🎁</div>
+          <h3>دعوت از دوستان</h3>
+          <p>دوستان خود را دعوت کنید و طبق برنامه معرفی NEXORA پاداش دریافت کنید.</p>
+        </div>
+
+        <div class="code-box">
+          <span class="code" id="refCode">NX-000000</span>
+          <button class="copy-btn" onclick="copyText(document.getElementById('refCode').textContent,'کد دعوت کپی شد')">کپی کد</button>
+        </div>
+        <div class="link-row">
+          <span id="refLink">https://t.me/NexoraInvestBot?start=ref_000000</span>
+          <button onclick="copyText(document.getElementById('refLink').textContent,'لینک دعوت کپی شد')">کپی لینک</button>
+        </div>
+
+        <div class="ref-stats">
+          <div class="ref-stat"><div class="v" id="refInvited">0</div><div class="l">نفر دعوت‌شده</div></div>
+          <div class="ref-stat"><div class="v" id="refRewardsAmt" style="color:var(--success)">0.00</div><div class="l">پاداش (USDT)</div></div>
+        </div>
+
+        <div class="section-title">سطوح پاداش</div>
+        <div class="tier-row"><div><div class="t">دعوت مستقیم</div><div class="s">به ازای هر کاربر فعال</div></div><div class="r">5%</div></div>
+        <div class="tier-row"><div><div class="t">نسل دوم</div><div class="s">دعوت‌شدگان دوستانتان</div></div><div class="r">2%</div></div>
+        <div class="tier-row"><div><div class="t">پاداش ثبت‌نام</div><div class="s">اولین سرمایه‌گذاری دوست شما</div></div><div class="r">1 USDT</div></div>
+
+        <button class="action-btn dark" style="width:100%;margin-top:16px;" onclick="simulateInvite()">شبیه‌سازی یک دعوت جدید (دمو)</button>
+      </div>
+    </section>
+
+    <!-- ================= TRANSACTIONS ================= -->
+    <section class="screen" data-screen="transactions">
+      <div class="section-title" style="margin-top:14px;">تاریخچه تراکنش‌ها</div>
+      <div id="txList"></div>
+    </section>
+
+    <!-- ================= INVEST DETAIL ================= -->
+    <section class="screen" data-screen="investdetail">
+      <div id="investDetailBody"></div>
+    </section>
+
+    <!-- ================= DEPOSIT (demo) ================= -->
+    <section class="screen" data-screen="deposit">
+      <div style="margin-top:10px;">
+        <div class="form-card">
+          <div class="field">
+            <label>مبلغ واریز آزمایشی</label>
+            <div class="amount-input-wrap">
+              <span class="unit">USDT</span>
+              <input type="number" id="depositAmt" placeholder="0.00" inputmode="decimal">
+            </div>
+            <div class="quick-amounts">
+              <button class="qa-btn" onclick="setVal('depositAmt',50)">50</button>
+              <button class="qa-btn" onclick="setVal('depositAmt',100)">100</button>
+              <button class="qa-btn" onclick="setVal('depositAmt',500)">500</button>
+              <button class="qa-btn" onclick="setVal('depositAmt',1000)">1000</button>
+            </div>
+            <div class="hint">این یک محیط دمو است؛ واریز واقعی انجام نمی‌شود و فقط برای آزمایش امکانات اپلیکیشن است.</div>
+          </div>
+          <button class="confirm-btn success" onclick="doDeposit()">تأیید واریز</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WITHDRAW ================= -->
+    <section class="screen" data-screen="withdraw">
+      <div style="margin-top:10px;">
+        <div class="form-card">
+          <div class="field">
+            <label>مبلغ برداشت</label>
+            <div class="amount-input-wrap">
+              <span class="unit">USDT</span>
+              <input type="number" id="withdrawAmt" placeholder="0.00" inputmode="decimal">
+            </div>
+            <div class="hint" id="withdrawHint">موجودی قابل برداشت: 0.00 USDT</div>
+          </div>
+          <div class="summary-list">
+            <div class="summary-row"><span class="k">کارمزد برداشت</span><span class="v muted">1٪ (حداقل 0.5 USDT)</span></div>
+            <div class="summary-row"><span class="k">مبلغ نهایی دریافتی</span><span class="v" id="withdrawNet">0.00 USDT</span></div>
+          </div>
+          <button class="confirm-btn" onclick="doWithdraw()">ثبت درخواست برداشت</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <nav class="navbar" id="navbar">
+    <button class="nav-btn active" data-nav="home" onclick="go('home')"><span class="ic">🏠</span><span class="lb">خانه</span></button>
+    <button class="nav-btn" data-nav="plans" onclick="go('plans')"><span class="ic">💼</span><span class="lb">بسته‌ها</span></button>
+    <button class="nav-btn" data-nav="myinvestments" onclick="go('myinvestments')"><span class="ic">📊</span><span class="lb">سرمایه‌گذاری</span></button>
+    <button class="nav-btn" data-nav="profile" onclick="go('profile')"><span class="ic">👤</span><span class="lb">پروفایل</span></button>
+  </nav>
+</div>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- Telegram WebApp integration (safe no-op outside Telegram) ---------------- */
+  var tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : null;
+  if (tg) { try{ tg.ready(); tg.expand(); }catch(e){} }
+  function haptic(style){
+    if (tg && tg.HapticFeedback) { try{ tg.HapticFeedback.impactOccurred(style||'light'); }catch(e){} }
+  }
+  var tgUser = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user : null;
+
+  /* ---------------- Theme ---------------- */
+  var root = document.documentElement;
+  function applyThemeIcon(){
+    var dark = getComputedTheme() === 'dark';
+    document.getElementById('themeIcon').innerHTML = dark
+      ? '<circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
+      : '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>';
+  }
+  function getComputedTheme(){
+    var explicit = root.getAttribute('data-theme');
+    if (explicit) return explicit;
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
+  document.getElementById('themeToggle').addEventListener('click', function(){
+    var cur = getComputedTheme();
+    root.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+    applyThemeIcon();
+    haptic('light');
+  });
+  applyThemeIcon();
+
+  /* ---------------- State ---------------- */
+  var STORAGE_KEY = 'nexora_state_v1';
+  var defaultState = function(){
+    var uid = 'NX-' + Math.floor(100000 + Math.random()*899999);
+    return {
+      userId: uid,
+      wallet: 'TXy8...' + uid.slice(-4) + 'aQ',
+      balance: 0,
+      totalProfit: 0,
+      totalInvested: 0,
+      investments: [],   // {id, planId, planName, amount, riskLabel, durationDays, startDate, endDate, expectedPct}
+      transactions: [],  // {id, type, label, amount, date}
+      referral: { code: uid.replace('NX-','NX-'), invited: 0, rewards: 0 },
+      firstRun: true
+    };
+  };
+  var state = load();
+  function load(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) return JSON.parse(raw);
+    }catch(e){}
+    return defaultState();
+  }
+  function save(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  /* ---------------- Plans data ---------------- */
+  var PLANS = [
+    { id:'starter', name:'Starter', tagClass:'starter', dot:'🟢', title:'شروع مطمئن برای تازه‌کارها',
+      desc:'مناسب کسانی که برای اولین بار سرمایه‌گذاری می‌کنند؛ ورود با سرمایه کم و ریسک پایین.',
+      min:10, duration:30, risk:'کم', avgPct:'2.8', fee:'بدون کارمزد ورود' },
+    { id:'growth', name:'Growth', tagClass:'growth', dot:'🔵', title:'رشد پایدار در بازه میان‌مدت',
+      desc:'سرمایه متوسط با دوره سرمایه‌گذاری مشخص و بازدهی متعادل نسبت به ریسک.',
+      min:100, duration:60, risk:'متوسط', avgPct:'4.5', fee:'کارمزد ورود ۰.۵٪' },
+    { id:'premium', name:'Premium', tagClass:'premium', dot:'🟣', title:'برای سرمایه‌گذاران حرفه‌ای',
+      desc:'سرمایه بالاتر با شرایط اختصاصی و پتانسیل بازدهی متفاوت نسبت به سایر بسته‌ها.',
+      min:500, duration:90, risk:'متوسط به بالا', avgPct:'6.2', fee:'کارمزد ورود ۱٪' },
+    { id:'flexible', name:'Flexible', tagClass:'flexible', dot:'🟠', title:'برداشت انعطاف‌پذیر',
+      desc:'امکان برداشت زودتر طبق قوانین پلتفرم؛ مناسب کسانی که به نقدشوندگی نیاز دارند.',
+      min:50, duration:'باز (طبق قوانین)', risk:'متوسط', avgPct:'3.5', fee:'کارمزد برداشت زودهنگام ۲٪' }
+  ];
+
+  /* ---------------- Navigation ---------------- */
+  var TAB_SCREENS = ['home','plans','myinvestments','profile'];
+  var currentScreen = 'home';
+  var selectedPlanId = null;
+
+  window.go = function(name){
+    document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+    var target = document.querySelector('.screen[data-screen="'+name+'"]');
+    if (target) target.classList.add('active');
+    currentScreen = name;
+    haptic('light');
+
+    var nav = document.getElementById('navbar');
+    if (TAB_SCREENS.indexOf(name) !== -1){
+      nav.classList.remove('hidden');
+      document.querySelectorAll('.nav-btn').forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-nav') === name);
+      });
+    } else {
+      nav.classList.add('hidden');
+    }
+
+    if (name === 'plans') renderPlans();
+    if (name === 'myinvestments') renderInvestments();
+    if (name === 'transactions') renderTransactions();
+    if (name === 'profile') renderProfile();
+    if (name === 'referral') renderReferral();
+    if (name === 'withdraw') renderWithdraw();
+
+    if (tg && tg.BackButton){
+      try{
+        if (TAB_SCREENS.indexOf(name) === -1){
+          tg.BackButton.show();
+          tg.BackButton.onClick(function(){ go('home'); });
+        } else {
+          tg.BackButton.hide();
+        }
+      }catch(e){}
+    }
+    window.scrollTo(0,0);
+  };
+
+  /* ---------------- Formatting ---------------- */
+  function money(n){
+    n = Number(n)||0;
+    return n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function fmtDate(d){
+    var dt = new Date(d);
+    return dt.toLocaleDateString('fa-IR', {month:'short', day:'numeric'});
+  }
+
+  /* ---------------- Toast ---------------- */
+  var toastTimer = null;
+  function toast(msg, kind){
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = 'show' + (kind ? ' '+kind : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2200);
+  }
+
+  /* ---------------- Renderers: Home ---------------- */
+  function renderHome(){
+    document.getElementById('balanceAmt').innerHTML = money(state.balance) + '<span>USDT</span>';
+    document.getElementById('statProfit').textContent = money(state.totalProfit);
+    document.getElementById('statInvested').textContent = money(state.totalInvested);
+    document.getElementById('statActive').textContent = state.investments.filter(i=>i.status!=='completed').length;
+
+    var name = tgUser && tgUser.first_name ? tgUser.first_name : null;
+    document.getElementById('greetLine').textContent = name ? ('سلام ' + name + '، خوش برگشتی') : 'به NEXORA خوش آمدید';
+
+    var wrap = document.getElementById('homeInvestPreview');
+    var active = state.investments.filter(i=>i.status!=='completed').slice(0,2);
+    if (!active.length){
+      wrap.innerHTML = '<div class="empty"><div class="ic">💼</div><div class="t">هنوز سرمایه‌گذاری فعالی ندارید</div><div class="s">از بخش «بسته‌ها» یکی را انتخاب کنید</div></div>';
+      return;
+    }
+    wrap.innerHTML = active.map(investCardHTML).join('');
+  }
+
+  /* ---------------- Renderers: Plans ---------------- */
+  function renderPlans(){
+    document.getElementById('plansList').innerHTML = PLANS.map(function(p){
+      return (
+      '<div class="plan-card">'+
+        '<div class="plan-top">'+
+          '<span class="plan-tag '+p.tagClass+'"><span class="plan-dot"></span>'+p.name+'</span>'+
+          '<span class="risk-badge">ریسک: '+p.risk+'</span>'+
+        '</div>'+
+        '<div class="plan-name">'+p.title+'</div>'+
+        '<div class="plan-desc">'+p.desc+'</div>'+
+        '<div class="plan-meta">'+
+          '<div class="meta-item"><div class="k">حداقل سرمایه</div><div class="v">'+p.min+' USDT</div></div>'+
+          '<div class="meta-item"><div class="k">مدت زمان</div><div class="v">'+ (typeof p.duration==='number' ? p.duration+' روز' : p.duration) +'</div></div>'+
+          '<div class="meta-item"><div class="k">میانگین بازدهی دوره قبل</div><div class="v">%'+p.avgPct+'</div></div>'+
+          '<div class="meta-item"><div class="k">کارمزد</div><div class="v" style="font-size:11px;">'+p.fee+'</div></div>'+
+        '</div>'+
+        '<button class="plan-cta" onclick="openInvest(\''+p.id+'\')">شروع سرمایه‌گذاری</button>'+
+        '<div class="plan-note">بازدهی نمایش داده‌شده بر اساس عملکرد گذشته صندوق است و سود آینده را تضمین نمی‌کند.</div>'+
+      '</div>');
+    }).join('');
+  }
+
+  /* ---------------- Invest detail / confirm ---------------- */
+  window.openInvest = function(planId){
+    selectedPlanId = planId;
+    var p = PLANS.find(x=>x.id===planId);
+    var body = document.getElementById('investDetailBody');
+    body.innerHTML = (
+    '<div class="subhead" style="padding:14px 0 6px;">'+
+      '<div class="backbtn" onclick="go(\'plans\')"><svg viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
+      '<h2>سرمایه‌گذاری در بسته '+p.name+'</h2>'+
+    '</div>'+
+    '<div class="form-card" style="margin-top:8px;">'+
+      '<div class="field">'+
+        '<label>مبلغ سرمایه‌گذاری</label>'+
+        '<div class="amount-input-wrap"><span class="unit">USDT</span><input type="number" id="investAmt" inputmode="decimal" placeholder="'+p.min+'"></div>'+
+        '<div class="quick-amounts">'+
+          '<button class="qa-btn" onclick="setVal(\'investAmt\','+p.min+')">'+p.min+'</button>'+
+          '<button class="qa-btn" onclick="setVal(\'investAmt\','+(p.min*5)+')">'+(p.min*5)+'</button>'+
+          '<button class="qa-btn" onclick="setVal(\'investAmt\','+(p.min*10)+')">'+(p.min*10)+'</button>'+
+          '<button class="qa-btn" onclick="setMaxInvest()">حداکثر</button>'+
+        '</div>'+
+        '<div class="hint" id="investHint">حداقل سرمایه‌گذاری: '+p.min+' USDT — موجودی شما: '+money(state.balance)+' USDT</div>'+
+      '</div>'+
+      '<div class="summary-list">'+
+        '<div class="summary-row"><span class="k">مدت زمان</span><span class="v">'+(typeof p.duration==='number' ? p.duration+' روز' : p.duration)+'</span></div>'+
+        '<div class="summary-row"><span class="k">سطح ریسک</span><span class="v">'+p.risk+'</span></div>'+
+        '<div class="summary-row"><span class="k">بازدهی برآوردی</span><span class="v" id="estReturn">—</span></div>'+
+        '<div class="summary-row"><span class="k">کارمزد</span><span class="v muted">'+p.fee+'</span></div>'+
+      '</div>'+
+      '<div class="disclaimer">بازدهی برآوردی بر اساس میانگین عملکرد گذشته این بسته محاسبه شده و تضمینی برای سود آینده نیست. سرمایه‌گذاری با ریسک همراه است.</div>'+
+      '<button class="confirm-btn" id="investConfirmBtn" disabled>تأیید سرمایه‌گذاری</button>'+
+    '</div>'
+    );
+
+    var input = document.getElementById('investAmt');
+    input.addEventListener('input', function(){ updateInvestSummary(p); });
+    updateInvestSummary(p);
+    go('investdetail');
+  };
+
+  function updateInvestSummary(p){
+    var val = parseFloat(document.getElementById('investAmt').value) || 0;
+    var hint = document.getElementById('investHint');
+    var btn = document.getElementById('investConfirmBtn');
+    var est = document.getElementById('estReturn');
+
+    if (val <= 0){
+      est.textContent = '—';
+      hint.textContent = 'حداقل سرمایه‌گذاری: '+p.min+' USDT — موجودی شما: '+money(state.balance)+' USDT';
+      hint.className = 'hint';
+      btn.disabled = true; btn.textContent = 'تأیید سرمایه‌گذاری';
+      return;
+    }
+    if (val < p.min){
+      hint.textContent = 'مبلغ کمتر از حداقل مجاز ('+p.min+' USDT) است';
+      hint.className = 'hint err';
+      est.textContent = '—';
+      btn.disabled = true; btn.textContent = 'تأیید سرمایه‌گذاری';
+      return;
+    }
+    if (val > state.balance){
+      hint.textContent = 'موجودی کافی نیست. موجودی فعلی: '+money(state.balance)+' USDT';
+      hint.className = 'hint err';
+      btn.disabled = true; btn.textContent = 'موجودی ناکافی';
+      est.textContent = '~ '+money(val * (parseFloat(p.avgPct)/100))+' USDT';
+      return;
+    }
+    hint.textContent = 'موجودی پس از سرمایه‌گذاری: '+money(state.balance - val)+' USDT';
+    hint.className = 'hint';
+    est.textContent = '~ '+money(val * (parseFloat(p.avgPct)/100))+' USDT';
+    btn.disabled = false; btn.textContent = 'تأیید سرمایه‌گذاری';
+    btn.onclick = function(){ confirmInvest(p, val); };
+  }
+
+  window.setMaxInvest = function(){
+    document.getElementById('investAmt').value = Math.floor(state.balance*100)/100;
+    var p = PLANS.find(x=>x.id===selectedPlanId);
+    updateInvestSummary(p);
+  };
+
+  function confirmInvest(p, amount){
+    state.balance -= amount;
+    state.totalInvested += amount;
+    var start = Date.now();
+    var durationDays = typeof p.duration === 'number' ? p.duration : 30;
+    var end = start + durationDays*24*3600*1000;
+    var inv = {
+      id: 'inv_'+Date.now(),
+      planId: p.id, planName: p.name, tagClass: p.tagClass,
+      amount: amount, risk: p.risk, durationDays: durationDays,
+      startDate: start, endDate: end, expectedPct: p.avgPct,
+      status: 'active'
+    };
+    state.investments.unshift(inv);
+    state.transactions.unshift({ id:'tx_'+Date.now(), type:'invest', label:'سرمایه‌گذاری در '+p.name, amount:-amount, date: Date.now() });
+    save();
+    haptic('medium');
+    toast('سرمایه‌گذاری با موفقیت ثبت شد', 'ok');
+    go('myinvestments');
+  }
+
+  /* ---------------- My Investments ---------------- */
+  function investCardHTML(inv){
+    var now = Date.now();
+    var pct = Math.min(100, Math.max(0, Math.round(((now - inv.startDate) / (inv.endDate - inv.startDate)) * 100)));
+    var isDone = pct >= 100;
+    if (isDone && inv.status !== 'completed') { /* visual only; state finalized in checkCompletions */ }
+    var daysLeft = Math.max(0, Math.ceil((inv.endDate - now)/(24*3600*1000)));
+    return (
+    '<div class="inv-item">'+
+      '<div class="inv-head">'+
+        '<span class="name">'+inv.planName+' — '+money(inv.amount)+' USDT</span>'+
+        '<span class="inv-status '+(isDone?'done':'active')+'">'+(isDone?'تکمیل‌شده':'در حال اجرا')+'</span>'+
+      '</div>'+
+      '<div class="inv-progress"><div class="inv-progress-fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="inv-foot">'+
+        '<span>شروع: '+fmtDate(inv.startDate)+'</span>'+
+        '<span>'+(isDone ? 'پایان یافته' : daysLeft+' روز باقیمانده')+'</span>'+
+        '<span>بازدهی برآوردی: <b>%'+inv.expectedPct+'</b></span>'+
+      '</div>'+
+    '</div>');
+  }
+
+  function checkCompletions(){
+    var now = Date.now();
+    var changed = false;
+    state.investments.forEach(function(inv){
+      if (inv.status === 'active' && now >= inv.endDate){
+        var profit = inv.amount * (parseFloat(inv.expectedPct)/100);
+        inv.status = 'completed';
+        state.balance += inv.amount + profit;
+        state.totalProfit += profit;
+        state.transactions.unshift({ id:'tx_'+Date.now()+Math.random(), type:'profit', label: inv.planName + ' تکمیل شد (اصل سرمایه + سود)', amount: inv.amount+profit, date: now });
+        changed = true;
+      }
+    });
+    if (changed) save();
+  }
+
+  function renderInvestments(){
+    checkCompletions();
+    var wrap = document.getElementById('investList');
+    if (!state.investments.length){
+      wrap.innerHTML = '<div class="empty"><div class="ic">📊</div><div class="t">هیچ سرمایه‌گذاری‌ای ثبت نشده</div><div class="s">از بخش بسته‌ها شروع کنید</div></div>';
+      return;
+    }
+    wrap.innerHTML = state.investments.map(investCardHTML).join('');
+  }
+
+  /* ---------------- Transactions ---------------- */
+  var TX_META = {
+    deposit: { ic:'⬇️', cls:'dep' },
+    withdraw:{ ic:'⬆️', cls:'wd' },
+    invest:  { ic:'💼', cls:'inv' },
+    profit:  { ic:'✨', cls:'profit' }
+  };
+  function renderTransactions(){
+    var wrap = document.getElementById('txList');
+    if (!state.transactions.length){
+      wrap.innerHTML = '<div class="empty"><div class="ic">🧾</div><div class="t">هنوز تراکنشی ثبت نشده</div><div class="s">تراکنش‌های شما اینجا نمایش داده می‌شود</div></div>';
+      return;
+    }
+    wrap.innerHTML = state.transactions.map(function(t){
+      var meta = TX_META[t.type] || {ic:'•',cls:'inv'};
+      var pos = t.amount >= 0;
+      return (
+      '<div class="tx-item">'+
+        '<div class="tx-ic '+meta.cls+'">'+meta.ic+'</div>'+
+        '<div class="tx-mid"><div class="t">'+t.label+'</div><div class="d">'+new Date(t.date).toLocaleString('fa-IR')+'</div></div>'+
+        '<div class="tx-amt '+(pos?'pos':'neg')+'">'+(pos?'+':'')+money(t.amount)+'</div>'+
+      '</div>');
+    }).join('');
+  }
+
+  /* ---------------- Profile ---------------- */
+  function renderProfile(){
+    document.getElementById('avatarLetter').textContent = (tgUser && tgUser.first_name) ? tgUser.first_name[0].toUpperCase() : 'N';
+    document.getElementById('profileName').textContent = (tgUser && tgUser.first_name) ? (tgUser.first_name + (tgUser.last_name ? ' '+tgUser.last_name : '')) : 'کاربر NEXORA';
+    document.getElementById('profileUserId').textContent = state.userId;
+    document.getElementById('profWallet').textContent = state.wallet;
+    document.getElementById('profActive').textContent = state.investments.filter(i=>i.status!=='completed').length;
+    document.getElementById('profInvested').textContent = money(state.totalInvested);
+    document.getElementById('profProfit').textContent = money(state.totalProfit);
+    document.getElementById('profRefRewards').textContent = money(state.referral.rewards) + ' USDT دریافتی';
+  }
+
+  window.confirmReset = function(){
+    if (confirm('همه داده‌های آزمایشی حساب شما پاک شود؟ این عملیات قابل بازگشت نیست.')){
+      state = defaultState();
+      save();
+      toast('حساب دمو بازنشانی شد', 'ok');
+      renderAll();
+      go('home');
+    }
+  };
+
+  /* ---------------- Referral ---------------- */
+  function renderReferral(){
+    document.getElementById('refCode').textContent = state.referral.code;
+    document.getElementById('refLink').textContent = 'https://t.me/NexoraInvestBot?start=ref_' + state.referral.code.replace('NX-','');
+    document.getElementById('refInvited').textContent = state.referral.invited;
+    document.getElementById('refRewardsAmt').textContent = money(state.referral.rewards);
+  }
+
+  window.simulateInvite = function(){
+    state.referral.invited += 1;
+    var reward = 1 + Math.random()*4;
+    state.referral.rewards += reward;
+    state.balance += reward;
+    state.transactions.unshift({ id:'tx_'+Date.now(), type:'profit', label:'پاداش معرفی دوست جدید', amount: reward, date: Date.now() });
+    save();
+    haptic('light');
+    toast('یک دعوت جدید ثبت شد! +'+money(reward)+' USDT پاداش', 'ok');
+    renderReferral();
+    renderProfile();
+  };
+
+  window.copyText = function(text, msg){
+    function done(){ toast(msg || 'کپی شد', 'ok'); haptic('light'); }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text, done); });
+    } else {
+      fallbackCopy(text, done);
+    }
+  };
+  function fallbackCopy(text, cb){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+    cb();
+  }
+
+  /* ---------------- Deposit (demo) ---------------- */
+  window.setVal = function(id, val){ document.getElementById(id).value = val; };
+
+  window.doDeposit = function(){
+    var amt = parseFloat(document.getElementById('depositAmt').value);
+    if (!amt || amt <= 0){ toast('مبلغ معتبر وارد کنید', 'err'); return; }
+    state.balance += amt;
+    state.transactions.unshift({ id:'tx_'+Date.now(), type:'deposit', label:'واریز آزمایشی به حساب', amount: amt, date: Date.now() });
+    save();
+    haptic('medium');
+    toast('مبلغ '+money(amt)+' USDT به موجودی اضافه شد', 'ok');
+    document.getElementById('depositAmt').value = '';
+    go('home');
+    renderHome();
+  };
+
+  /* ---------------- Withdraw ---------------- */
+  function renderWithdraw(){
+    document.getElementById('withdrawHint').textContent = 'موجودی قابل برداشت: '+money(state.balance)+' USDT';
+    document.getElementById('withdrawAmt').value = '';
+    document.getElementById('withdrawNet').textContent = '0.00 USDT';
+    var input = document.getElementById('withdrawAmt');
+    input.oninput = function(){
+      var v = parseFloat(input.value)||0;
+      var fee = Math.max(v*0.01, v>0?0.5:0);
+      document.getElementById('withdrawNet').textContent = money(Math.max(0,v-fee)) + ' USDT';
+    };
+  }
+  window.doWithdraw = function(){
+    var amt = parseFloat(document.getElementById('withdrawAmt').value);
+    if (!amt || amt <= 0){ toast('مبلغ معتبر وارد کنید', 'err'); return; }
+    if (amt > state.balance){ toast('موجودی کافی نیست', 'err'); return; }
+    var fee = Math.max(amt*0.01, 0.5);
+    var net = amt - fee;
+    state.balance -= amt;
+    state.transactions.unshift({ id:'tx_'+Date.now(), type:'withdraw', label:'درخواست برداشت وجه', amount: -amt, date: Date.now() });
+    save();
+    haptic('medium');
+    toast('درخواست برداشت ثبت شد. مبلغ خالص: '+money(net)+' USDT', 'ok');
+    go('home');
+    renderHome();
+  };
+
+  /* ---------------- Render all + init ---------------- */
+  function renderAll(){
+    renderHome();
+    renderPlans();
+    renderInvestments();
+    renderTransactions();
+    renderProfile();
+    renderReferral();
+  }
+
+  save();
+  renderAll();
+
+  setTimeout(function(){
+    document.getElementById('splash').classList.add('hide');
+  }, 900);
+
+  // periodic re-check for investment completion while app open
+  setInterval(function(){
+    checkCompletions();
+    if (currentScreen === 'home') renderHome();
+    if (currentScreen === 'myinvestments') renderInvestments();
+  }, 15000);
+
+})();
+</script>
+
+</body>
+</html>
