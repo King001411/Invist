@@ -862,7 +862,7 @@ body.rtl .lang-select {
       <section class="page active" id="page-home">
         <div class="balance-card">
           <div class="balance-label" data-i18n="total_balance">Total Balance</div>
-          <div class="balance-amount" id="balTotal">0.00<span>USDT</span></div>
+          <div class="balance-amount" id="balTotal">0.00<span data-i18n="usdt_symbol">USDT</span></div>
           <div class="balance-stats">
             <div class="balance-stat"><div class="balance-stat-val" id="balProfit">0.00</div><div class="balance-stat-label" data-i18n="total_profit">Total Profit</div></div>
             <div class="balance-stat"><div class="balance-stat-val" id="balInvested">0.00</div><div class="balance-stat-label" data-i18n="total_invested">Total Invested</div></div>
@@ -947,6 +947,13 @@ body.rtl .lang-select {
 const I18N = {
   en: {
     brand_tag: 'Smart Investment Platform',
+    err_min_deposit: 'Minimum deposit is {n} USDT',
+    err_min_amount: 'Minimum amount is {n} USDT',
+    err_min_withdrawal: 'Minimum withdrawal is {n} USDT',
+    reward_rate: 'Reward Rate',
+    open_via_telegram: 'Open via Telegram Mini App',
+    firebase_hint: 'Data is loaded from Firebase Realtime Database.',
+    usdt_symbol: 'USDT',
     investment_label: 'Investment',
     daily_profit: 'Daily Profit',
     period_profit: '30-Day Profit',
@@ -1058,6 +1065,13 @@ const I18N = {
   },
   fa: {
     brand_tag: 'پلتفرم سرمایه‌گذاری هوشمند',
+    err_min_deposit: 'حداقل واریز {n} USDT است',
+    err_min_amount: 'حداقل مبلغ {n} USDT است',
+    err_min_withdrawal: 'حداقل برداشت {n} USDT است',
+    reward_rate: 'نرخ پاداش',
+    open_via_telegram: 'از طریق مینی\u200cاپ تلگرام باز کنید',
+    firebase_hint: 'داده\u200cها از پایگاه\u200cداده Firebase بارگذاری می\u200cشوند.',
+    usdt_symbol: 'USDT',
     investment_label: 'سرمایه',
     daily_profit: 'سود روزانه',
     period_profit: 'سود ۳۰ روزه',
@@ -1169,6 +1183,13 @@ const I18N = {
   },
   prs: {
     brand_tag: 'پلتفرم سرمایه‌گذاری هوشمند',
+    err_min_deposit: 'حداقل واریز {n} USDT است',
+    err_min_amount: 'حداقل مبلغ {n} USDT است',
+    err_min_withdrawal: 'حداقل برداشت {n} USDT است',
+    reward_rate: 'نرخ پاداش',
+    open_via_telegram: 'از طریق مینی\u200cاپ تلگرام باز کنید',
+    firebase_hint: 'داده\u200cها از پایگاه\u200cداده Firebase بارگذاری می\u200cشوند.',
+    usdt_symbol: 'USDT',
     investment_label: 'سرمایه',
     daily_profit: 'فایده روزانه',
     period_profit: 'فایده ۳۰ روزه',
@@ -1280,6 +1301,13 @@ const I18N = {
   },
   ar: {
     brand_tag: 'منصة الاستثمار الذكي',
+    err_min_deposit: 'الحد الأدنى للإيداع {n} USDT',
+    err_min_amount: 'الحد الأدنى للمبلغ {n} USDT',
+    err_min_withdrawal: 'الحد الأدنى للسحب {n} USDT',
+    reward_rate: 'معدل المكافأة',
+    open_via_telegram: 'افتح عبر تطبيق تيليجرام المصغر',
+    firebase_hint: 'يتم تحميل البيانات من قاعدة بيانات Firebase.',
+    usdt_symbol: 'USDT',
     investment_label: 'الاستثمار',
     daily_profit: 'الربح اليومي',
     period_profit: 'ربح 30 يوماً',
@@ -1391,6 +1419,13 @@ const I18N = {
   },
   ru: {
     brand_tag: 'Умная инвестиционная платформа',
+    err_min_deposit: 'Минимальный депозит {n} USDT',
+    err_min_amount: 'Минимальная сумма {n} USDT',
+    err_min_withdrawal: 'Минимальный вывод {n} USDT',
+    reward_rate: 'Ставка награды',
+    open_via_telegram: 'Откройте через Telegram Mini App',
+    firebase_hint: 'Данные загружаются из Firebase Realtime Database.',
+    usdt_symbol: 'USDT',
     investment_label: 'Инвестиция',
     daily_profit: 'Дневная прибыль',
     period_profit: 'Прибыль за 30 дней',
@@ -1502,6 +1537,13 @@ const I18N = {
   },
   tr: {
     brand_tag: 'Akıllı Yatırım Platformu',
+    err_min_deposit: 'Minimum yatırma {n} USDT',
+    err_min_amount: 'Minimum tutar {n} USDT',
+    err_min_withdrawal: 'Minimum çekim {n} USDT',
+    reward_rate: 'Ödül Oranı',
+    open_via_telegram: 'Telegram Mini App üzerinden açın',
+    firebase_hint: 'Veriler Firebase Realtime Database’den yüklenir.',
+    usdt_symbol: 'USDT',
     investment_label: 'Yatırım',
     daily_profit: 'Günlük Kâr',
     period_profit: '30 Günlük Kâr',
@@ -1613,6 +1655,13 @@ const I18N = {
   },
   es: {
     brand_tag: 'Plataforma de Inversión Inteligente',
+    err_min_deposit: 'Depósito mínimo {n} USDT',
+    err_min_amount: 'Monto mínimo {n} USDT',
+    err_min_withdrawal: 'Retiro mínimo {n} USDT',
+    reward_rate: 'Tasa de recompensa',
+    open_via_telegram: 'Abra a través de Telegram Mini App',
+    firebase_hint: 'Los datos se cargan desde Firebase Realtime Database.',
+    usdt_symbol: 'USDT',
     investment_label: 'Inversión',
     daily_profit: 'Beneficio Diario',
     period_profit: 'Beneficio 30 Días',
@@ -1740,11 +1789,17 @@ let currentLang = 'en';
 function t(key) {
   return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
 }
+function tf(key, vars) {
+  var s = t(key);
+  if (vars) Object.keys(vars).forEach(function (k) { s = s.split('{' + k + '}').join(String(vars[k])); });
+  return s;
+}
 
 function setLanguage(lang) {
   if (!I18N[lang]) lang = 'en';
   currentLang = lang;
   document.documentElement.lang = lang;
+  document.documentElement.dir = RTL_LANGS.includes(lang) ? 'rtl' : 'ltr';
   document.body.classList.toggle('rtl', RTL_LANGS.includes(lang));
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const k = el.getAttribute('data-i18n');
@@ -1753,6 +1808,9 @@ function setLanguage(lang) {
   document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
     el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
   });
+  // Update static USDT labels in balance card if present
+  var bal = document.querySelector('#balTotal span');
+  if (bal) bal.textContent = t('usdt_symbol');
 }
 
   </script>
@@ -2055,7 +2113,7 @@ const NEXORA_FB = (function () {
   async function createDeposit(tid, network, amount) {
     var cfg = await getConfig();
     var amt = round2(amount);
-    if (!amt || amt < cfg.min_deposit) throw new Error('Minimum deposit is ' + cfg.min_deposit + ' USDT');
+    if (!amt || amt < cfg.min_deposit) throw new Error((typeof tf === 'function' ? tf('err_min_deposit', {n: cfg.min_deposit}) : ('Minimum deposit is ' + cfg.min_deposit + ' USDT')));
     var net = DEPOSIT_ADDRESSES[network];
     if (!net) throw new Error('Invalid network');
 
@@ -2152,7 +2210,7 @@ const NEXORA_FB = (function () {
     var plan = plans.find(function (p) { return Number(p.id) === Number(planId); });
     if (!plan) throw new Error('Invalid plan');
     var amt = round2(amount);
-    if (!amt || amt < plan.min_amount) throw new Error('Minimum amount is ' + plan.min_amount + ' USDT');
+    if (!amt || amt < plan.min_amount) throw new Error((typeof tf === 'function' ? tf('err_min_amount', {n: plan.min_amount}) : ('Minimum amount is ' + plan.min_amount + ' USDT')));
     var f = figures(amt, plan.daily_rate, plan.duration_days || 30);
 
     await debitWallet(tid, amt, 'investment', { plan: plan.name });
@@ -2274,7 +2332,7 @@ const NEXORA_FB = (function () {
   async function createWithdrawal(tid, amount, address, network) {
     var cfg = await getConfig();
     var amt = round2(amount);
-    if (!amt || amt < cfg.min_withdrawal) throw new Error('Minimum withdrawal is ' + cfg.min_withdrawal + ' USDT');
+    if (!amt || amt < cfg.min_withdrawal) throw new Error((typeof tf === 'function' ? tf('err_min_withdrawal', {n: cfg.min_withdrawal}) : ('Minimum withdrawal is ' + cfg.min_withdrawal + ' USDT')));
     if (!isValidAddress(network, address)) throw new Error('Invalid wallet address for selected network');
     var fee = round2((amt * cfg.withdrawal_fee_percent) / 100);
     var netAmount = round2(amt - fee);
@@ -2461,19 +2519,30 @@ const NEXORA_FB = (function () {
     } catch (e) {}
   }
 
+  function numberLocale() {
+    if (currentLang === 'fa' || currentLang === 'prs') return 'fa-IR';
+    if (currentLang === 'ar') return 'ar';
+    if (currentLang === 'ru') return 'ru-RU';
+    if (currentLang === 'tr') return 'tr-TR';
+    if (currentLang === 'es') return 'es-ES';
+    return 'en-US';
+  }
   function fmt(n, d) {
     d = d == null ? 2 : d;
     var x = Number(n);
-    if (!isFinite(x)) return (0).toFixed(d);
-    return x.toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
+    if (!isFinite(x)) x = 0;
+    try {
+      return x.toLocaleString(numberLocale(), { minimumFractionDigits: d, maximumFractionDigits: d });
+    } catch (e) {
+      return x.toFixed(d);
+    }
   }
-  function fmtUsdt(n, d) { return fmt(n, d) + ' USDT'; }
+  function fmtUsdt(n, d) { return fmt(n, d) + ' ' + t('usdt_symbol'); }
   function round2(n) { return Math.round((Number(n) + Number.EPSILON) * 100) / 100; }
   function fmtDate(iso) {
     if (!iso) return '—';
     try {
-      var loc = currentLang === 'fa' || currentLang === 'prs' ? 'fa-IR' : currentLang === 'ar' ? 'ar' : undefined;
-      return new Date(iso).toLocaleString(loc, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      return new Date(iso).toLocaleString(numberLocale(), { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
     } catch (e) { return String(iso).slice(0, 16).replace('T', ' '); }
   }
   function toast(msg, type) {
@@ -2507,7 +2576,7 @@ const NEXORA_FB = (function () {
 
   function updateBalanceUI() {
     var s = state.stats || { balance: 0, total_profit: 0, total_invested: 0, active_investments: 0 };
-    $('#balTotal').innerHTML = fmt(s.balance) + '<span>USDT</span>';
+    $('#balTotal').innerHTML = fmt(s.balance) + '<span>' + t('usdt_symbol') + '</span>';
     $('#balProfit').textContent = fmt(s.total_profit);
     $('#balInvested').textContent = fmt(s.total_invested);
     $('#balActive').textContent = String(s.active_investments || 0);
@@ -2562,7 +2631,7 @@ const NEXORA_FB = (function () {
       '<div class="form-group"><label class="form-label">' + t('select_network') + '</label><div class="network-grid" id="netGrid">' +
       state.networks.map(function (n, i) {
         return '<div class="network-option ' + (i === 0 ? 'active' : '') + '" data-net="' + n.network + '"><div class="network-option-name">' + n.network +
-          '</div><div class="network-option-chain">' + n.chain + ' · USDT</div></div>';
+          '</div><div class="network-option-chain">' + n.chain + ' · ' + t('usdt_symbol') + '</div></div>';
       }).join('') +
       '</div></div><div class="form-group"><label class="form-label">' + t('deposit_address') + '</label><div class="address-box" id="depAddress">' +
       state.networks[0].address + '</div><div class="address-actions"><button class="btn btn-outline btn-sm" id="btnCopyAddr" style="flex:1">' +
@@ -2643,8 +2712,8 @@ const NEXORA_FB = (function () {
       '</label><input type="number" class="form-input" id="wdAmount" min="5" step="0.01" inputmode="decimal" />' +
       '<div class="form-hint">' + t('min_withdrawal') + ': 5 USDT · ' + t('fee') + ': ' + feePct + '%</div></div>' +
       '<div class="detail-rows card" style="margin-bottom:14px;padding:12px 14px">' +
-      '<div class="detail-row"><span class="detail-label">' + t('fee') + '</span><span class="detail-value" id="wdFee">0.00 USDT</span></div>' +
-      '<div class="detail-row"><span class="detail-label">' + t('net_amount') + '</span><span class="detail-value amount-pos" id="wdNet">0.00 USDT</span></div></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('fee') + '</span><span class="detail-value" id="wdFee">0.00</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('net_amount') + '</span><span class="detail-value amount-pos" id="wdNet">0.00</span></div></div>' +
       '<button class="btn btn-primary btn-block" id="btnSubmitWd">' + t('request_withdrawal') + '</button>');
     $('#wdNetGrid').addEventListener('click', function (e) {
       var opt = e.target.closest('.network-option'); if (!opt) return;
@@ -2699,7 +2768,7 @@ const NEXORA_FB = (function () {
       '<div class="detail-row"><span class="detail-label">' + t('daily_profit') + '</span><span class="detail-value amount-pos" id="invDaily">' + fmtUsdt(initial.dailyProfit) + '</span></div>' +
       '<div class="detail-row"><span class="detail-label">' + t('period_profit') + '</span><span class="detail-value amount-pos" id="invPeriod">' + fmtUsdt(initial.period) + '</span></div>' +
       '<div class="detail-row"><span class="detail-label">' + t('total_amount') + '</span><span class="detail-value" id="invTotal">' + fmtUsdt(initial.total) + '</span></div>' +
-      '<div class="detail-row"><span class="detail-label">' + t('fee') + '</span><span class="detail-value">0.00 USDT</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('fee') + '</span><span class="detail-value">0.00</span></div>' +
       '<div class="detail-row"><span class="detail-label">' + t('start_date') + '</span><span class="detail-value">' + fmtDate(start.toISOString()) + '</span></div>' +
       '<div class="detail-row"><span class="detail-label">' + t('maturity_date') + '</span><span class="detail-value">' + fmtDate(mat.toISOString()) + '</span></div></div>' +
       '<div class="disclaimer" style="margin-bottom:14px">' + t('disclaimer') + '</div>' +
@@ -2799,7 +2868,7 @@ const NEXORA_FB = (function () {
         '<div class="stat-card"><div class="stat-card-val">' + data.total_referrals + '</div><div class="stat-card-label">' + t('total_referrals') + '</div></div>' +
         '<div class="stat-card"><div class="stat-card-val">' + data.active_referrals + '</div><div class="stat-card-label">' + t('active_referrals') + '</div></div>' +
         '<div class="stat-card"><div class="stat-card-val">' + fmt(data.referral_rewards) + '</div><div class="stat-card-label">' + t('referral_rewards') + ' USDT</div></div>' +
-        '<div class="stat-card"><div class="stat-card-val">' + (data.referral_percent || 5) + '%</div><div class="stat-card-label">Reward Rate</div></div>';
+        '<div class="stat-card"><div class="stat-card-val">' + (data.referral_percent || 5) + '%</div><div class="stat-card-label">' + t('reward_rate') + '</div></div>';
       state._refLink = data.referral_link;
     } catch (e) { toast(e.message, 'error'); }
   }
@@ -2863,7 +2932,7 @@ const NEXORA_FB = (function () {
     }
     gate.innerHTML = '<h1>NEXORA</h1><p><strong>' + t('auth_required_title') + '</strong></p><p>' + t('auth_required_body') +
       '</p>' + (msg ? '<p class="form-hint">' + msg + '</p>' : '') +
-      '<p class="form-hint">Firebase: usdt-reward-default-rtdb</p>';
+      '<p class="form-hint">' + t('firebase_hint') + '</p>';
     gate.style.display = 'flex';
   }
 
@@ -2875,7 +2944,7 @@ const NEXORA_FB = (function () {
       var params = new URLSearchParams(location.search);
       var tid = params.get('tg_id');
       if (!tid) {
-        throw Object.assign(new Error('Open via Telegram Mini App'), { code: 'AUTH_REQUIRED' });
+        throw Object.assign(new Error(t('open_via_telegram')), { code: 'AUTH_REQUIRED' });
       }
       tgUser = {
         id: tid,
@@ -2906,7 +2975,15 @@ const NEXORA_FB = (function () {
     $('#langSelect').addEventListener('change', async function (e) {
       setLanguage(e.target.value);
       sessionStorage.setItem('nx_lang', e.target.value);
+      updateBalanceUI();
       renderPlans();
+      // Re-render visible page content in new language
+      var active = document.querySelector('.page.active');
+      var page = active && active.id ? active.id.replace('page-', '') : 'home';
+      if (page === 'investments') loadInvestments();
+      else if (page === 'history') loadTransactions();
+      else if (page === 'referral') loadReferral();
+      else if (page === 'profile') renderProfile();
       try { if (state.tid) await NEXORA_FB.setLanguage(state.tid, e.target.value); } catch (err) {}
     });
     $('#txChips').addEventListener('click', function (e) {
@@ -2955,5 +3032,5 @@ const NEXORA_FB = (function () {
 })();
 
   </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3d2395e58d190d0',t:'MTc4OTc1NDE1Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3d24e8a9ceb90d0',t:'MTc4OTc1NTAxOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
