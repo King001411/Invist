@@ -63,3 +63,2897 @@ body {
   color: var(--text);
   min-height: 100%;
   line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.rtl {
+  font-family: var(--font-fa);
+  direction: rtl;
+}
+
+body.rtl .chevron-flip { transform: scaleX(-1); }
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  background: var(--bg);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: rgba(248, 250, 252, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.brand { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-name {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--navy);
+}
+.brand-tag {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-3);
+  letter-spacing: 0.02em;
+}
+
+.lang-select {
+  appearance: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 28px 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+body.rtl .lang-select {
+  padding: 6px 12px 6px 28px;
+  background-position: left 10px center;
+}
+
+.main-content {
+  padding: 16px 16px calc(var(--nav-h) + var(--safe-bottom) + 20px);
+  min-height: calc(100vh - var(--header-h));
+  scrollbar-width: thin;
+}
+
+.page { display: none; animation: fadeIn 0.25s ease; }
+.page.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.balance-card {
+  background: linear-gradient(145deg, #0B1220 0%, #152238 55%, #1a2d4a 100%);
+  border-radius: var(--radius);
+  padding: 22px 20px 18px;
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+.balance-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(37,99,235,0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+.balance-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.balance-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+.balance-amount {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+  font-variant-numeric: tabular-nums;
+}
+.balance-amount span {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-inline-start: 6px;
+}
+.balance-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+.balance-stat {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-xs);
+  padding: 10px 8px;
+  text-align: center;
+}
+.balance-stat-val {
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.balance-stat-label {
+  font-size: 9px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 2px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+.secondary-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--transition);
+  padding: 13px 16px;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+}
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+.btn-primary:hover:not(:disabled) { background: var(--blue-hover); }
+.btn-success {
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.25);
+}
+.btn-outline {
+  background: var(--bg-card);
+  color: var(--navy);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); }
+.btn-ghost { background: transparent; color: var(--text-2); border: 1px solid transparent; }
+.btn-danger { background: var(--red); color: #fff; }
+.btn-sm { padding: 8px 12px; font-size: 12px; border-radius: var(--radius-xs); }
+.btn-block { width: 100%; }
+.btn-icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+.section { margin-top: 24px; }
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.section-title { font-size: 15px; font-weight: 700; color: var(--navy); }
+.section-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.disclaimer {
+  font-size: 11px;
+  color: var(--text-3);
+  background: var(--border-soft);
+  border-radius: var(--radius-xs);
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  line-height: 1.45;
+  border-inline-start: 3px solid var(--orange);
+}
+
+.plans-grid { display: flex; flex-direction: column; gap: 12px; }
+
+.plan-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.plan-card:hover {
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: var(--shadow);
+}
+.plan-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.plan-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+}
+.plan-badge.vip-high {
+  background: linear-gradient(135deg, #1E3A5F, #2563EB);
+}
+.plan-rate { text-align: end; }
+.plan-rate-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+.plan-rate-label {
+  font-size: 10px;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.plan-figures {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 14px;
+  background: var(--bg);
+  border-radius: var(--radius-xs);
+  padding: 4px 12px;
+  border: 1px solid var(--border-soft);
+}
+.plan-fig-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 12px;
+  gap: 10px;
+}
+.plan-fig-row:last-child { border-bottom: none; }
+.plan-fig-label { color: var(--text-3); font-weight: 500; }
+.plan-fig-value {
+  color: var(--text);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+.plan-fig-value.green { color: var(--green); }
+.plan-fig-value.emphasis {
+  color: var(--navy);
+  font-size: 13px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.list { display: flex; flex-direction: column; gap: 10px; }
+.list-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.list-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.list-item-title { font-size: 14px; font-weight: 700; color: var(--navy); }
+.list-item-sub { font-size: 12px; color: var(--text-3); }
+
+.amount-pos { color: var(--green); font-weight: 700; }
+.amount-neg { color: var(--red); font-weight: 700; }
+.amount-neutral { color: var(--text); font-weight: 700; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.badge-pending { background: var(--orange-soft); color: #B45309; }
+.badge-verifying { background: var(--blue-soft); color: var(--blue); }
+.badge-confirmed, .badge-completed, .badge-active { background: var(--green-soft); color: #15803D; }
+.badge-rejected, .badge-cancelled { background: var(--red-soft); color: #B91C1C; }
+.badge-processing { background: var(--blue-soft); color: var(--blue); }
+
+.form-group { margin-bottom: 14px; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: 6px;
+}
+.form-input, .form-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+.form-input:focus, .form-select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-soft);
+  background: #fff;
+}
+.form-hint { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+.form-error { font-size: 12px; color: var(--red); margin-top: 4px; }
+
+.network-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.network-option {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 12px 10px;
+  cursor: pointer;
+  background: var(--bg-card);
+  text-align: center;
+  transition: all var(--transition);
+}
+.network-option:hover { border-color: var(--blue); }
+.network-option.active {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+.network-option-name { font-size: 12px; font-weight: 700; color: var(--navy); }
+.network-option-chain { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+
+.address-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 12px;
+  word-break: break-all;
+  font-size: 12px;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  color: var(--text);
+  line-height: 1.4;
+}
+.address-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+.qr-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  background: #fff;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  margin: 12px 0;
+}
+.qr-wrap img { width: 180px; height: 180px; display: block; }
+
+.detail-rows { display: flex; flex-direction: column; gap: 0; }
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 13px;
+  gap: 12px;
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-label { color: var(--text-3); font-weight: 500; }
+.detail-value {
+  color: var(--text);
+  font-weight: 600;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.profile-hero {
+  text-align: center;
+  padding: 20px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+}
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 auto 12px;
+}
+.profile-name { font-size: 18px; font-weight: 700; color: var(--navy); }
+.profile-id { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+.stat-card-val {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+.stat-card-label { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+
+.referral-link-box {
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-xs);
+  padding: 12px;
+  font-size: 12px;
+  word-break: break-all;
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 18, 32, 0.55);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s, visibility 0.25s;
+  padding: 0;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal {
+  background: var(--bg-card);
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  max-height: 92dvh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 0 calc(16px + var(--safe-bottom));
+  -webkit-overflow-scrolling: touch;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 10px auto 0;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 10px;
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+  z-index: 2;
+}
+.modal-title { font-size: 16px; font-weight: 700; color: var(--navy); }
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--bg);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-2);
+}
+.modal-body { padding: 8px 20px 20px; }
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  height: calc(var(--nav-h) + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  z-index: 60;
+  box-shadow: 0 -4px 20px rgba(11, 18, 32, 0.04);
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-3);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 8px 4px;
+  transition: color var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-item svg { width: 22px; height: 22px; stroke-width: 1.75; }
+.nav-item.active { color: var(--blue); }
+.nav-item.active svg { stroke-width: 2.25; }
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  transition: opacity 0.3s;
+}
+.loading-screen.hide { opacity: 0; pointer-events: none; }
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-brand {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--navy);
+}
+
+.empty-state, .error-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-3);
+}
+.empty-state svg, .error-state svg {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+.empty-state p, .error-state p { font-size: 14px; font-weight: 500; }
+
+.auth-gate {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  text-align: center;
+  background: var(--bg);
+}
+.auth-gate h1 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.auth-gate p {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.55;
+  max-width: 320px;
+  margin-bottom: 20px;
+}
+
+.toast-container {
+  position: fixed;
+  top: calc(var(--header-h) + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  width: calc(100% - 32px);
+  max-width: 448px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--navy);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  animation: toastIn 0.3s ease;
+  pointer-events: auto;
+}
+.toast.success { background: #166534; }
+.toast.error { background: #991B1B; }
+.toast.warning { background: #92400E; }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all var(--transition);
+}
+.chip.active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-bottom: 16px;
+}
+
+@media (min-width: 481px) {
+  #app { box-shadow: 0 0 60px rgba(11, 18, 32, 0.08); }
+  .modal-overlay { align-items: center; padding: 20px; }
+  .modal { border-radius: 20px; max-height: 85vh; }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-brand">NEXORA</div>
+    <div class="spinner"></div>
+  </div>
+  <div id="app">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-name">NEXORA</div>
+        <div class="brand-tag" data-i18n="brand_tag">Smart Investment Platform</div>
+      </div>
+      <select class="lang-select" id="langSelect" aria-label="Language">
+        <option value="en">English</option>
+        <option value="fa">فارسی</option>
+        <option value="prs">دری</option>
+        <option value="ar">العربية</option>
+        <option value="ru">Русский</option>
+        <option value="tr">Türkçe</option>
+        <option value="es">Español</option>
+      </select>
+    </header>
+    <main class="main-content">
+      <section class="page active" id="page-home">
+        <div class="balance-card">
+          <div class="balance-label" data-i18n="total_balance">Total Balance</div>
+          <div class="balance-amount" id="balTotal">0.00<span>USDT</span></div>
+          <div class="balance-stats">
+            <div class="balance-stat"><div class="balance-stat-val" id="balProfit">0.00</div><div class="balance-stat-label" data-i18n="total_profit">Total Profit</div></div>
+            <div class="balance-stat"><div class="balance-stat-val" id="balInvested">0.00</div><div class="balance-stat-label" data-i18n="total_invested">Total Invested</div></div>
+            <div class="balance-stat"><div class="balance-stat-val" id="balActive">0</div><div class="balance-stat-label" data-i18n="active_investments">Active</div></div>
+          </div>
+        </div>
+        <div class="action-row">
+          <button class="btn btn-primary" id="btnDeposit"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"/></svg><span data-i18n="deposit">Deposit</span></button>
+          <button class="btn btn-outline" id="btnWithdraw"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 19V5M5 12l7-7 7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="withdraw">Withdraw</span></button>
+        </div>
+        <div class="secondary-actions">
+          <button class="btn btn-outline btn-sm" id="btnMyInvHome"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18" stroke-width="1.75"/><path d="M7 14l4-4 3 3 5-6" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="my_investments">My Investments</span></button>
+          <button class="btn btn-outline btn-sm" id="btnTxHome"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke-width="1.75" stroke-linecap="round"/></svg><span data-i18n="transactions">Transactions</span></button>
+        </div>
+        <div class="section">
+          <div class="section-header"><h2 class="section-title" data-i18n="investment_plans">Investment Plans</h2></div>
+          <div class="disclaimer" data-i18n="disclaimer"></div>
+          <div class="plans-grid" id="plansGrid"></div>
+        </div>
+      </section>
+      <section class="page" id="page-investments">
+        <h1 class="page-title" data-i18n="my_investments_title">My Investments</h1>
+        <p class="page-subtitle" data-i18n="no_investments_desc"></p>
+        <div id="investmentsList" class="list"></div>
+      </section>
+      <section class="page" id="page-referral">
+        <h1 class="page-title" data-i18n="invite_title">Invite Friends</h1>
+        <p class="page-subtitle" data-i18n="referral_info"></p>
+        <div class="card" style="margin-bottom:14px">
+          <div class="form-label" data-i18n="referral_link">Your Referral Link</div>
+          <div class="referral-link-box" id="refLink">—</div>
+          <div class="address-actions">
+            <button class="btn btn-outline btn-sm" id="btnCopyRef" style="flex:1"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="9" y="9" width="13" height="13" rx="2" stroke-width="1.75"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-width="1.75"/></svg><span data-i18n="copy_link">Copy Link</span></button>
+            <button class="btn btn-primary btn-sm" id="btnShareRef" style="flex:1"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="18" cy="5" r="3" stroke-width="1.75"/><circle cx="6" cy="12" r="3" stroke-width="1.75"/><circle cx="18" cy="19" r="3" stroke-width="1.75"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" stroke-width="1.75"/></svg><span data-i18n="share">Share</span></button>
+          </div>
+        </div>
+        <div class="stats-grid" id="refStats"></div>
+      </section>
+      <section class="page" id="page-history">
+        <h1 class="page-title" data-i18n="history_title">Transaction History</h1>
+        <div class="chips" id="txChips">
+          <button class="chip active" data-filter="all" data-i18n="all">All</button>
+          <button class="chip" data-filter="deposit" data-i18n="type_deposit">Deposit</button>
+          <button class="chip" data-filter="investment" data-i18n="type_investment">Investment</button>
+          <button class="chip" data-filter="profit" data-i18n="type_profit">Profit</button>
+          <button class="chip" data-filter="withdrawal" data-i18n="type_withdrawal">Withdrawal</button>
+          <button class="chip" data-filter="referral_reward" data-i18n="type_referral_reward">Referral</button>
+        </div>
+        <div id="txList" class="list"></div>
+      </section>
+      <section class="page" id="page-profile">
+        <h1 class="page-title" data-i18n="profile_title">My Profile</h1>
+        <div class="profile-hero">
+          <div class="avatar" id="profileAvatar">N</div>
+          <div class="profile-name" id="profileName">—</div>
+          <div class="profile-id" id="profileTgId">—</div>
+        </div>
+        <div class="stats-grid" id="profileStats"></div>
+      </section>
+    </main>
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="nav-item active" data-page="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1v-9.5z" stroke-linejoin="round"/></svg><span data-i18n="nav_home">Home</span></button>
+      <button class="nav-item" data-page="investments"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="nav_investments">Investments</span></button>
+      <button class="nav-item" data-page="referral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg><span data-i18n="nav_referral">Referral</span></button>
+      <button class="nav-item" data-page="history"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg><span data-i18n="nav_history">History</span></button>
+      <button class="nav-item" data-page="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span data-i18n="nav_profile">Profile</span></button>
+    </nav>
+  </div>
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <div class="modal-handle"></div>
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">—</h3>
+        <button class="modal-close" id="modalClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+const I18N = {
+  en: {
+    brand_tag: 'Smart Investment Platform',
+    investment_label: 'Investment',
+    daily_profit: 'Daily Profit',
+    period_profit: '30-Day Profit',
+    total_amount: 'Total Amount',
+    auth_required_title: 'Open in Telegram',
+    auth_required_body: 'NEXORA runs as a Telegram Mini App. Open this app from your Telegram bot to sign in securely. No demo or sample balances are used.',
+    deposit_wait_verify: 'Balance increases only after real on-chain payment is confirmed by admin.',
+    current_profit: 'Current Profit',
+    nav_home: 'Home',
+    nav_investments: 'Investments',
+    nav_referral: 'Referral',
+    nav_history: 'History',
+    nav_profile: 'Profile',
+    total_balance: 'Total Balance',
+    total_profit: 'Total Profit',
+    total_invested: 'Total Invested',
+    active_investments: 'Active',
+    deposit: 'Deposit',
+    withdraw: 'Withdraw',
+    my_investments: 'My Investments',
+    transactions: 'Transactions',
+    investment_plans: 'Investment Plans',
+    disclaimer: 'Displayed rates are model-based estimates for planning purposes only and are not guaranteed returns. Actual results depend on verified backend calculations.',
+    min_invest: 'Min. Invest',
+    duration: 'Duration',
+    daily_return: 'Daily Est.',
+    total_return_30: '30D Est.',
+    invest_now: 'Invest Now',
+    days: 'days',
+    deposit_title: 'Deposit / Charge',
+    select_network: 'Select Network',
+    deposit_address: 'Deposit Address',
+    copy_address: 'Copy Address',
+    amount_usdt: 'Amount (USDT)',
+    i_have_paid: 'I Have Paid',
+    submit_deposit: 'Submit Deposit Request',
+    qr_code: 'QR Code',
+    withdraw_title: 'Withdraw USDT',
+    wallet_address: 'Wallet Address',
+    network: 'Network',
+    request_withdrawal: 'Request Withdrawal',
+    fee: 'Fee',
+    net_amount: 'You Receive',
+    min_withdrawal: 'Minimum withdrawal',
+    invest_title: 'Confirm Investment',
+    investment_amount: 'Investment Amount',
+    estimated_return: 'Estimated Return (30D)',
+    start_date: 'Start Date',
+    maturity_date: 'Maturity Date',
+    confirm_investment: 'Confirm Investment',
+    available_balance: 'Available Balance',
+    my_investments_title: 'My Investments',
+    no_investments: 'No investments yet',
+    no_investments_desc: 'Choose a VIP plan to start investing.',
+    status_active: 'Active',
+    status_completed: 'Completed',
+    status_pending: 'Pending',
+    status_verifying: 'Verifying',
+    status_confirmed: 'Confirmed',
+    status_rejected: 'Rejected',
+    status_processing: 'Processing',
+    current_return: 'Current Return',
+    history_title: 'Transaction History',
+    no_transactions: 'No transactions yet',
+    type_deposit: 'Deposit',
+    type_investment: 'Investment',
+    type_profit: 'Profit',
+    type_withdrawal: 'Withdrawal',
+    type_referral_reward: 'Referral Reward',
+    type_refund: 'Refund',
+    profile_title: 'My Profile',
+    telegram_id: 'Telegram ID',
+    telegram_name: 'Name',
+    wallet_balance: 'Wallet',
+    active_plans: 'Active Plans',
+    referral_rewards: 'Referral Rewards',
+    invite_title: 'Invite Friends',
+    referral_link: 'Your Referral Link',
+    copy_link: 'Copy Link',
+    share: 'Share',
+    total_referrals: 'Total Referrals',
+    active_referrals: 'Active Referrals',
+    referral_info: 'Earn a reward when your referrals make their first confirmed deposit. Rewards are calculated and credited by the server only.',
+    loading: 'Loading…',
+    success: 'Success',
+    error: 'Error',
+    copied: 'Copied to clipboard',
+    deposit_submitted: 'Deposit request submitted. Awaiting verification.',
+    payment_marked: 'Marked as paid. Under verification.',
+    investment_success: 'Investment confirmed successfully.',
+    withdrawal_submitted: 'Withdrawal request submitted.',
+    insufficient_balance: 'Insufficient balance',
+    invalid_amount: 'Please enter a valid amount',
+    invalid_address: 'Invalid wallet address for selected network',
+    select_network_err: 'Please select a network',
+    close: 'Close',
+    cancel: 'Cancel',
+    all: 'All',
+    retry: 'Retry',
+    something_wrong: 'Something went wrong',
+    plan: 'Plan',
+    tx_id: 'Transaction ID',
+    view_plans: 'View Plans',
+    back: 'Back',
+    amount: 'Amount',
+    date: 'Date',
+    status: 'Status',
+    type: 'Type',
+  },
+  fa: {
+    brand_tag: 'پلتفرم سرمایه‌گذاری هوشمند',
+    investment_label: 'سرمایه',
+    daily_profit: 'سود روزانه',
+    period_profit: 'سود ۳۰ روزه',
+    total_amount: 'مبلغ کل',
+    auth_required_title: 'باز کردن در تلگرام',
+    auth_required_body: 'NEXORA به\u200cصورت مینی\u200cاپ تلگرام اجرا می\u200cشود. برای ورود امن از بات تلگرام باز کنید. هیچ موجودی آزمایشی وجود ندارد.',
+    deposit_wait_verify: 'موجودی فقط پس از تأیید واقعی تراکنش بلاکچین توسط ادمین افزایش می\u200cیابد.',
+    current_profit: 'سود فعلی',
+    nav_home: 'خانه',
+    nav_investments: 'سرمایه‌گذاری',
+    nav_referral: 'دعوت',
+    nav_history: 'تاریخچه',
+    nav_profile: 'پروفایل',
+    total_balance: 'موجودی کل',
+    total_profit: 'سود کل',
+    total_invested: 'کل سرمایه‌گذاری',
+    active_investments: 'فعال',
+    deposit: 'واریز',
+    withdraw: 'برداشت',
+    my_investments: 'سرمایه‌گذاری‌های من',
+    transactions: 'تراکنش‌ها',
+    investment_plans: 'پلن‌های سرمایه‌گذاری',
+    disclaimer: 'نرخ‌های نمایش‌داده‌شده برآورد مدل برای برنامه‌ریزی هستند و سود تضمینی محسوب نمی‌شوند. نتایج واقعی فقط از محاسبات سرور اعمال می‌شود.',
+    min_invest: 'حداقل سرمایه',
+    duration: 'مدت',
+    daily_return: 'بازده روزانه',
+    total_return_30: 'برآورد ۳۰ روز',
+    invest_now: 'سرمایه‌گذاری',
+    days: 'روز',
+    deposit_title: 'واریز / شارژ حساب',
+    select_network: 'انتخاب شبکه',
+    deposit_address: 'آدرس واریز',
+    copy_address: 'کپی آدرس',
+    amount_usdt: 'مبلغ (USDT)',
+    i_have_paid: 'پرداخت کردم',
+    submit_deposit: 'ثبت درخواست واریز',
+    qr_code: 'کد QR',
+    withdraw_title: 'برداشت USDT',
+    wallet_address: 'آدرس کیف پول',
+    network: 'شبکه',
+    request_withdrawal: 'درخواست برداشت',
+    fee: 'کارمزد',
+    net_amount: 'مبلغ دریافتی',
+    min_withdrawal: 'حداقل برداشت',
+    invest_title: 'تأیید سرمایه‌گذاری',
+    investment_amount: 'مبلغ سرمایه‌گذاری',
+    estimated_return: 'بازده برآوردی (۳۰ روز)',
+    start_date: 'تاریخ شروع',
+    maturity_date: 'تاریخ سررسید',
+    confirm_investment: 'تأیید سرمایه‌گذاری',
+    available_balance: 'موجودی قابل استفاده',
+    my_investments_title: 'سرمایه‌گذاری‌های من',
+    no_investments: 'هنوز سرمایه‌گذاری ندارید',
+    no_investments_desc: 'یک پلن VIP انتخاب کنید.',
+    status_active: 'فعال',
+    status_completed: 'تکمیل‌شده',
+    status_pending: 'در انتظار',
+    status_verifying: 'در حال بررسی',
+    status_confirmed: 'تأیید شده',
+    status_rejected: 'رد شده',
+    status_processing: 'در حال پردازش',
+    current_return: 'بازده فعلی',
+    history_title: 'تاریخچه تراکنش‌ها',
+    no_transactions: 'تراکنشی وجود ندارد',
+    type_deposit: 'واریز',
+    type_investment: 'سرمایه‌گذاری',
+    type_profit: 'سود',
+    type_withdrawal: 'برداشت',
+    type_referral_reward: 'پاداش دعوت',
+    type_refund: 'بازگشت وجه',
+    profile_title: 'پروفایل من',
+    telegram_id: 'شناسه تلگرام',
+    telegram_name: 'نام',
+    wallet_balance: 'کیف پول',
+    active_plans: 'پلن‌های فعال',
+    referral_rewards: 'پاداش دعوت',
+    invite_title: 'دعوت دوستان',
+    referral_link: 'لینک دعوت شما',
+    copy_link: 'کپی لینک',
+    share: 'اشتراک‌گذاری',
+    total_referrals: 'کل دعوت‌ها',
+    active_referrals: 'دعوت‌های فعال',
+    referral_info: 'با اولین واریز تأییدشدهٔ دوستان، پاداش دریافت می‌کنید. محاسبه فقط در سرور انجام می‌شود.',
+    loading: 'در حال بارگذاری…',
+    success: 'موفق',
+    error: 'خطا',
+    copied: 'کپی شد',
+    deposit_submitted: 'درخواست واریز ثبت شد. در انتظار تأیید.',
+    payment_marked: 'به‌عنوان پرداخت‌شده ثبت شد. در حال بررسی.',
+    investment_success: 'سرمایه‌گذاری با موفقیت ثبت شد.',
+    withdrawal_submitted: 'درخواست برداشت ثبت شد.',
+    insufficient_balance: 'موجودی کافی نیست',
+    invalid_amount: 'مبلغ معتبر وارد کنید',
+    invalid_address: 'آدرس کیف پول برای شبکه انتخابی نامعتبر است',
+    select_network_err: 'لطفاً شبکه را انتخاب کنید',
+    close: 'بستن',
+    cancel: 'انصراف',
+    all: 'همه',
+    retry: 'تلاش مجدد',
+    something_wrong: 'مشکلی پیش آمد',
+    plan: 'پلن',
+    tx_id: 'شناسه تراکنش',
+    view_plans: 'مشاهده پلن‌ها',
+    back: 'بازگشت',
+    amount: 'مبلغ',
+    date: 'تاریخ',
+    status: 'وضعیت',
+    type: 'نوع',
+  },
+  prs: {
+    brand_tag: 'پلتفرم سرمایه‌گذاری هوشمند',
+    investment_label: 'سرمایه',
+    daily_profit: 'فایده روزانه',
+    period_profit: 'فایده ۳۰ روزه',
+    total_amount: 'مبلغ مجموعی',
+    auth_required_title: 'در تلگرام باز کنید',
+    auth_required_body: 'NEXORA مینی\u200cاپ تلگرام است. برای ورود از بات تلگرام باز کنید. بیلانس آزمایشی وجود ندارد.',
+    deposit_wait_verify: 'بیلانس فقط بعد از تأیید واقعی تراکنش توسط ادمین زیاد می\u200cشود.',
+    current_profit: 'فایده فعلی',
+    nav_home: 'خانه',
+    nav_investments: 'سرمایه‌گذاری',
+    nav_referral: 'دعوت',
+    nav_history: 'تاریخچه',
+    nav_profile: 'پروفایل',
+    total_balance: 'بیلانس مجموعی',
+    total_profit: 'فایده مجموعی',
+    total_invested: 'مجموع سرمایه‌گذاری',
+    active_investments: 'فعال',
+    deposit: 'واریز',
+    withdraw: 'برداشت',
+    my_investments: 'سرمایه‌گذاری‌های من',
+    transactions: 'معاملات',
+    investment_plans: 'پلان‌های سرمایه‌گذاری',
+    disclaimer: 'نرخ‌های نشان‌داده‌شده تخمین مدل است و مفاد تضمینی نیست. نتایج واقعی صرف از محاسبات سرور می‌آید.',
+    min_invest: 'حداقل سرمایه',
+    duration: 'مدت',
+    daily_return: 'بازده روزانه',
+    total_return_30: 'تخمین ۳۰ روز',
+    invest_now: 'سرمایه‌گذاری',
+    days: 'روز',
+    deposit_title: 'واریز / شارژ حساب',
+    select_network: 'انتخاب شبکه',
+    deposit_address: 'آدرس واریز',
+    copy_address: 'کپی آدرس',
+    amount_usdt: 'مقدار (USDT)',
+    i_have_paid: 'پرداخت کردم',
+    submit_deposit: 'ثبت درخواست واریز',
+    qr_code: 'کد QR',
+    withdraw_title: 'برداشت USDT',
+    wallet_address: 'آدرس والیت',
+    network: 'شبکه',
+    request_withdrawal: 'درخواست برداشت',
+    fee: 'فیس',
+    net_amount: 'مقدار دریافتی',
+    min_withdrawal: 'حداقل برداشت',
+    invest_title: 'تأیید سرمایه‌گذاری',
+    investment_amount: 'مقدار سرمایه‌گذاری',
+    estimated_return: 'بازده تخمینی (۳۰ روز)',
+    start_date: 'تاریخ شروع',
+    maturity_date: 'تاریخ ختم',
+    confirm_investment: 'تأیید سرمایه‌گذاری',
+    available_balance: 'بیلانس موجود',
+    my_investments_title: 'سرمایه‌گذاری‌های من',
+    no_investments: 'هنوز سرمایه‌گذاری ندارید',
+    no_investments_desc: 'یک پلان VIP انتخاب کنید.',
+    status_active: 'فعال',
+    status_completed: 'تکمیل‌شده',
+    status_pending: 'در انتظار',
+    status_verifying: 'در حال بررسی',
+    status_confirmed: 'تأیید شده',
+    status_rejected: 'رد شده',
+    status_processing: 'در حال پردازش',
+    current_return: 'بازده فعلی',
+    history_title: 'تاریخچه معاملات',
+    no_transactions: 'معامله‌ای وجود ندارد',
+    type_deposit: 'واریز',
+    type_investment: 'سرمایه‌گذاری',
+    type_profit: 'فایده',
+    type_withdrawal: 'برداشت',
+    type_referral_reward: 'پاداش دعوت',
+    type_refund: 'بازگشت وجه',
+    profile_title: 'پروفایل من',
+    telegram_id: 'آی‌دی تلگرام',
+    telegram_name: 'نام',
+    wallet_balance: 'والیت',
+    active_plans: 'پلان‌های فعال',
+    referral_rewards: 'پاداش دعوت',
+    invite_title: 'دعوت دوستان',
+    referral_link: 'لینک دعوت شما',
+    copy_link: 'کپی لینک',
+    share: 'شریک ساختن',
+    total_referrals: 'مجموع دعوت‌ها',
+    active_referrals: 'دعوت‌های فعال',
+    referral_info: 'با اولین واریز تأییدشده دوستان، پاداش می‌گیرید. محاسبه فقط در سرور است.',
+    loading: 'در حال بارگذاری…',
+    success: 'موفق',
+    error: 'خطا',
+    copied: 'کپی شد',
+    deposit_submitted: 'درخواست واریز ثبت شد.',
+    payment_marked: 'به‌عنوان پرداخت‌شده ثبت شد.',
+    investment_success: 'سرمایه‌گذاری موفقانه ثبت شد.',
+    withdrawal_submitted: 'درخواست برداشت ثبت شد.',
+    insufficient_balance: 'بیلانس کافی نیست',
+    invalid_amount: 'مقدار معتبر وارد کنید',
+    invalid_address: 'آدرس والیت نامعتبر است',
+    select_network_err: 'لطفاً شبکه را انتخاب کنید',
+    close: 'بستن',
+    cancel: 'لغو',
+    all: 'همه',
+    retry: 'تلاش دوباره',
+    something_wrong: 'مشکلی پیش آمد',
+    plan: 'پلان',
+    tx_id: 'آی‌دی معامله',
+    view_plans: 'دیدن پلان‌ها',
+    back: 'بازگشت',
+    amount: 'مقدار',
+    date: 'تاریخ',
+    status: 'وضعیت',
+    type: 'نوع',
+  },
+  ar: {
+    brand_tag: 'منصة الاستثمار الذكي',
+    investment_label: 'الاستثمار',
+    daily_profit: 'الربح اليومي',
+    period_profit: 'ربح 30 يوماً',
+    total_amount: 'المبلغ الإجمالي',
+    auth_required_title: 'افتح في تيليجرام',
+    auth_required_body: 'يعمل NEXORA كتطبيق تيليجرام. افتحه من البوت لتسجيل الدخول. لا توجد أرصدة تجريبية.',
+    deposit_wait_verify: 'يزيد الرصيد فقط بعد تأكيد الدفع الفعلي على السلسلة من قبل المشرف.',
+    current_profit: 'الربح الحالي',
+    nav_home: 'الرئيسية',
+    nav_investments: 'الاستثمارات',
+    nav_referral: 'الإحالة',
+    nav_history: 'السجل',
+    nav_profile: 'الملف',
+    total_balance: 'الرصيد الإجمالي',
+    total_profit: 'إجمالي الربح',
+    total_invested: 'إجمالي المستثمر',
+    active_investments: 'نشط',
+    deposit: 'إيداع',
+    withdraw: 'سحب',
+    my_investments: 'استثماراتي',
+    transactions: 'المعاملات',
+    investment_plans: 'خطط الاستثمار',
+    disclaimer: 'المعدلات المعروضة تقديرات نموذجية لأغراض التخطيط وليست عوائد مضمونة. تُطبَّق النتائج الفعلية من الخادم فقط.',
+    min_invest: 'الحد الأدنى',
+    duration: 'المدة',
+    daily_return: 'العائد اليومي',
+    total_return_30: 'تقدير 30 يوم',
+    invest_now: 'استثمر الآن',
+    days: 'يوم',
+    deposit_title: 'إيداع / شحن',
+    select_network: 'اختر الشبكة',
+    deposit_address: 'عنوان الإيداع',
+    copy_address: 'نسخ العنوان',
+    amount_usdt: 'المبلغ (USDT)',
+    i_have_paid: 'لقد دفعت',
+    submit_deposit: 'إرسال طلب الإيداع',
+    qr_code: 'رمز QR',
+    withdraw_title: 'سحب USDT',
+    wallet_address: 'عنوان المحفظة',
+    network: 'الشبكة',
+    request_withdrawal: 'طلب السحب',
+    fee: 'الرسوم',
+    net_amount: 'المبلغ المستلم',
+    min_withdrawal: 'الحد الأدنى للسحب',
+    invest_title: 'تأكيد الاستثمار',
+    investment_amount: 'مبلغ الاستثمار',
+    estimated_return: 'العائد التقديري (30 يوم)',
+    start_date: 'تاريخ البدء',
+    maturity_date: 'تاريخ الاستحقاق',
+    confirm_investment: 'تأكيد الاستثمار',
+    available_balance: 'الرصيد المتاح',
+    my_investments_title: 'استثماراتي',
+    no_investments: 'لا توجد استثمارات بعد',
+    no_investments_desc: 'اختر خطة VIP للبدء.',
+    status_active: 'نشط',
+    status_completed: 'مكتمل',
+    status_pending: 'قيد الانتظار',
+    status_verifying: 'قيد التحقق',
+    status_confirmed: 'مؤكد',
+    status_rejected: 'مرفوض',
+    status_processing: 'قيد المعالجة',
+    current_return: 'العائد الحالي',
+    history_title: 'سجل المعاملات',
+    no_transactions: 'لا توجد معاملات',
+    type_deposit: 'إيداع',
+    type_investment: 'استثمار',
+    type_profit: 'ربح',
+    type_withdrawal: 'سحب',
+    type_referral_reward: 'مكافأة إحالة',
+    type_refund: 'استرداد',
+    profile_title: 'ملفي',
+    telegram_id: 'معرف تيليجرام',
+    telegram_name: 'الاسم',
+    wallet_balance: 'المحفظة',
+    active_plans: 'الخطط النشطة',
+    referral_rewards: 'مكافآت الإحالة',
+    invite_title: 'دعوة الأصدقاء',
+    referral_link: 'رابط الإحالة',
+    copy_link: 'نسخ الرابط',
+    share: 'مشاركة',
+    total_referrals: 'إجمالي الإحالات',
+    active_referrals: 'الإحالات النشطة',
+    referral_info: 'احصل على مكافأة عند أول إيداع مؤكد لمدعويك. تُحتسب المكافآت من الخادم فقط.',
+    loading: 'جارٍ التحميل…',
+    success: 'نجاح',
+    error: 'خطأ',
+    copied: 'تم النسخ',
+    deposit_submitted: 'تم إرسال طلب الإيداع. بانتظار التحقق.',
+    payment_marked: 'تم التحديد كمدفوع. قيد التحقق.',
+    investment_success: 'تم تأكيد الاستثمار بنجاح.',
+    withdrawal_submitted: 'تم إرسال طلب السحب.',
+    insufficient_balance: 'رصيد غير كافٍ',
+    invalid_amount: 'أدخل مبلغاً صالحاً',
+    invalid_address: 'عنوان محفظة غير صالح للشبكة',
+    select_network_err: 'يرجى اختيار الشبكة',
+    close: 'إغلاق',
+    cancel: 'إلغاء',
+    all: 'الكل',
+    retry: 'إعادة المحاولة',
+    something_wrong: 'حدث خطأ ما',
+    plan: 'الخطة',
+    tx_id: 'معرف المعاملة',
+    view_plans: 'عرض الخطط',
+    back: 'رجوع',
+    amount: 'المبلغ',
+    date: 'التاريخ',
+    status: 'الحالة',
+    type: 'النوع',
+  },
+  ru: {
+    brand_tag: 'Умная инвестиционная платформа',
+    investment_label: 'Инвестиция',
+    daily_profit: 'Дневная прибыль',
+    period_profit: 'Прибыль за 30 дней',
+    total_amount: 'Итоговая сумма',
+    auth_required_title: 'Открыть в Telegram',
+    auth_required_body: 'NEXORA — Mini App Telegram. Откройте через бота. Демо-балансов нет.',
+    deposit_wait_verify: 'Баланс увеличивается только после подтверждения реальной on-chain оплаты администратором.',
+    current_profit: 'Текущая прибыль',
+    nav_home: 'Главная',
+    nav_investments: 'Инвестиции',
+    nav_referral: 'Рефералы',
+    nav_history: 'История',
+    nav_profile: 'Профиль',
+    total_balance: 'Общий баланс',
+    total_profit: 'Общая прибыль',
+    total_invested: 'Всего инвестировано',
+    active_investments: 'Активные',
+    deposit: 'Депозит',
+    withdraw: 'Вывод',
+    my_investments: 'Мои инвестиции',
+    transactions: 'Транзакции',
+    investment_plans: 'Инвестиционные планы',
+    disclaimer: 'Отображаемые ставки — модельные оценки и не являются гарантированной доходностью. Фактические результаты применяются только сервером.',
+    min_invest: 'Мин. сумма',
+    duration: 'Срок',
+    daily_return: 'Дневная оценка',
+    total_return_30: 'Оценка 30д',
+    invest_now: 'Инвестировать',
+    days: 'дней',
+    deposit_title: 'Депозит / Пополнение',
+    select_network: 'Выберите сеть',
+    deposit_address: 'Адрес депозита',
+    copy_address: 'Копировать адрес',
+    amount_usdt: 'Сумма (USDT)',
+    i_have_paid: 'Я оплатил',
+    submit_deposit: 'Отправить заявку',
+    qr_code: 'QR-код',
+    withdraw_title: 'Вывод USDT',
+    wallet_address: 'Адрес кошелька',
+    network: 'Сеть',
+    request_withdrawal: 'Запросить вывод',
+    fee: 'Комиссия',
+    net_amount: 'К получению',
+    min_withdrawal: 'Минимальный вывод',
+    invest_title: 'Подтверждение инвестиции',
+    investment_amount: 'Сумма инвестиции',
+    estimated_return: 'Оценка дохода (30д)',
+    start_date: 'Дата начала',
+    maturity_date: 'Дата окончания',
+    confirm_investment: 'Подтвердить',
+    available_balance: 'Доступный баланс',
+    my_investments_title: 'Мои инвестиции',
+    no_investments: 'Инвестиций пока нет',
+    no_investments_desc: 'Выберите VIP-план.',
+    status_active: 'Активна',
+    status_completed: 'Завершена',
+    status_pending: 'Ожидание',
+    status_verifying: 'Проверка',
+    status_confirmed: 'Подтверждено',
+    status_rejected: 'Отклонено',
+    status_processing: 'Обработка',
+    current_return: 'Текущий доход',
+    history_title: 'История транзакций',
+    no_transactions: 'Транзакций нет',
+    type_deposit: 'Депозит',
+    type_investment: 'Инвестиция',
+    type_profit: 'Прибыль',
+    type_withdrawal: 'Вывод',
+    type_referral_reward: 'Реферальная награда',
+    type_refund: 'Возврат',
+    profile_title: 'Мой профиль',
+    telegram_id: 'Telegram ID',
+    telegram_name: 'Имя',
+    wallet_balance: 'Кошелёк',
+    active_plans: 'Активные планы',
+    referral_rewards: 'Реферальные',
+    invite_title: 'Пригласить друзей',
+    referral_link: 'Ваша реферальная ссылка',
+    copy_link: 'Копировать',
+    share: 'Поделиться',
+    total_referrals: 'Всего рефералов',
+    active_referrals: 'Активные',
+    referral_info: 'Награда начисляется после первого подтверждённого депозита реферала. Только на сервере.',
+    loading: 'Загрузка…',
+    success: 'Успешно',
+    error: 'Ошибка',
+    copied: 'Скопировано',
+    deposit_submitted: 'Заявка на депозит отправлена.',
+    payment_marked: 'Отмечено как оплачено.',
+    investment_success: 'Инвестиция подтверждена.',
+    withdrawal_submitted: 'Заявка на вывод отправлена.',
+    insufficient_balance: 'Недостаточно средств',
+    invalid_amount: 'Введите корректную сумму',
+    invalid_address: 'Неверный адрес для сети',
+    select_network_err: 'Выберите сеть',
+    close: 'Закрыть',
+    cancel: 'Отмена',
+    all: 'Все',
+    retry: 'Повторить',
+    something_wrong: 'Что-то пошло не так',
+    plan: 'План',
+    tx_id: 'ID транзакции',
+    view_plans: 'Смотреть планы',
+    back: 'Назад',
+    amount: 'Сумма',
+    date: 'Дата',
+    status: 'Статус',
+    type: 'Тип',
+  },
+  tr: {
+    brand_tag: 'Akıllı Yatırım Platformu',
+    investment_label: 'Yatırım',
+    daily_profit: 'Günlük Kâr',
+    period_profit: '30 Günlük Kâr',
+    total_amount: 'Toplam Tutar',
+    auth_required_title: 'Telegram’da Açın',
+    auth_required_body: 'NEXORA bir Telegram Mini App’tir. Bot üzerinden açın. Demo bakiye yok.',
+    deposit_wait_verify: 'Bakiye yalnızca gerçek zincir ödemesi admin tarafından onaylandıktan sonra artar.',
+    current_profit: 'Güncel Kâr',
+    nav_home: 'Ana Sayfa',
+    nav_investments: 'Yatırımlar',
+    nav_referral: 'Referans',
+    nav_history: 'Geçmiş',
+    nav_profile: 'Profil',
+    total_balance: 'Toplam Bakiye',
+    total_profit: 'Toplam Kâr',
+    total_invested: 'Toplam Yatırım',
+    active_investments: 'Aktif',
+    deposit: 'Yatır',
+    withdraw: 'Çek',
+    my_investments: 'Yatırımlarım',
+    transactions: 'İşlemler',
+    investment_plans: 'Yatırım Planları',
+    disclaimer: 'Gösterilen oranlar planlama amaçlı model tahminleridir ve garanti edilmez. Gerçek sonuçlar yalnızca sunucu hesaplamalarından uygulanır.',
+    min_invest: 'Min. Yatırım',
+    duration: 'Süre',
+    daily_return: 'Günlük Tahmini',
+    total_return_30: '30G Tahmini',
+    invest_now: 'Yatırım Yap',
+    days: 'gün',
+    deposit_title: 'Yatırma / Yükleme',
+    select_network: 'Ağ Seçin',
+    deposit_address: 'Yatırma Adresi',
+    copy_address: 'Adresi Kopyala',
+    amount_usdt: 'Tutar (USDT)',
+    i_have_paid: 'Ödeme Yaptım',
+    submit_deposit: 'Yatırma Talebi Gönder',
+    qr_code: 'QR Kod',
+    withdraw_title: 'USDT Çek',
+    wallet_address: 'Cüzdan Adresi',
+    network: 'Ağ',
+    request_withdrawal: 'Çekim Talebi',
+    fee: 'Ücret',
+    net_amount: 'Alacağınız',
+    min_withdrawal: 'Minimum çekim',
+    invest_title: 'Yatırımı Onayla',
+    investment_amount: 'Yatırım Tutarı',
+    estimated_return: 'Tahmini Getiri (30G)',
+    start_date: 'Başlangıç',
+    maturity_date: 'Vade',
+    confirm_investment: 'Yatırımı Onayla',
+    available_balance: 'Kullanılabilir Bakiye',
+    my_investments_title: 'Yatırımlarım',
+    no_investments: 'Henüz yatırım yok',
+    no_investments_desc: 'VIP plan seçin.',
+    status_active: 'Aktif',
+    status_completed: 'Tamamlandı',
+    status_pending: 'Beklemede',
+    status_verifying: 'Doğrulanıyor',
+    status_confirmed: 'Onaylandı',
+    status_rejected: 'Reddedildi',
+    status_processing: 'İşleniyor',
+    current_return: 'Güncel Getiri',
+    history_title: 'İşlem Geçmişi',
+    no_transactions: 'İşlem yok',
+    type_deposit: 'Yatırma',
+    type_investment: 'Yatırım',
+    type_profit: 'Kâr',
+    type_withdrawal: 'Çekim',
+    type_referral_reward: 'Referans Ödülü',
+    type_refund: 'İade',
+    profile_title: 'Profilim',
+    telegram_id: 'Telegram ID',
+    telegram_name: 'İsim',
+    wallet_balance: 'Cüzdan',
+    active_plans: 'Aktif Planlar',
+    referral_rewards: 'Referans Ödülleri',
+    invite_title: 'Arkadaş Davet Et',
+    referral_link: 'Referans Bağlantınız',
+    copy_link: 'Bağlantıyı Kopyala',
+    share: 'Paylaş',
+    total_referrals: 'Toplam Referans',
+    active_referrals: 'Aktif Referans',
+    referral_info: 'Davet ettiklerinizin ilk onaylı yatırmasında ödül kazanın. Yalnızca sunucu hesaplar.',
+    loading: 'Yükleniyor…',
+    success: 'Başarılı',
+    error: 'Hata',
+    copied: 'Kopyalandı',
+    deposit_submitted: 'Yatırma talebi gönderildi.',
+    payment_marked: 'Ödendi olarak işaretlendi.',
+    investment_success: 'Yatırım onaylandı.',
+    withdrawal_submitted: 'Çekim talebi gönderildi.',
+    insufficient_balance: 'Yetersiz bakiye',
+    invalid_amount: 'Geçerli tutar girin',
+    invalid_address: 'Seçilen ağ için geçersiz adres',
+    select_network_err: 'Lütfen ağ seçin',
+    close: 'Kapat',
+    cancel: 'İptal',
+    all: 'Tümü',
+    retry: 'Tekrar Dene',
+    something_wrong: 'Bir şeyler ters gitti',
+    plan: 'Plan',
+    tx_id: 'İşlem ID',
+    view_plans: 'Planları Gör',
+    back: 'Geri',
+    amount: 'Tutar',
+    date: 'Tarih',
+    status: 'Durum',
+    type: 'Tür',
+  },
+  es: {
+    brand_tag: 'Plataforma de Inversión Inteligente',
+    investment_label: 'Inversión',
+    daily_profit: 'Beneficio Diario',
+    period_profit: 'Beneficio 30 Días',
+    total_amount: 'Monto Total',
+    auth_required_title: 'Abrir en Telegram',
+    auth_required_body: 'NEXORA es un Mini App de Telegram. Ábralo desde el bot. No hay saldos de demostración.',
+    deposit_wait_verify: 'El saldo aumenta solo tras la confirmación real on-chain por el administrador.',
+    current_profit: 'Beneficio Actual',
+    nav_home: 'Inicio',
+    nav_investments: 'Inversiones',
+    nav_referral: 'Referidos',
+    nav_history: 'Historial',
+    nav_profile: 'Perfil',
+    total_balance: 'Saldo Total',
+    total_profit: 'Beneficio Total',
+    total_invested: 'Total Invertido',
+    active_investments: 'Activas',
+    deposit: 'Depositar',
+    withdraw: 'Retirar',
+    my_investments: 'Mis Inversiones',
+    transactions: 'Transacciones',
+    investment_plans: 'Planes de Inversión',
+    disclaimer: 'Las tasas mostradas son estimaciones del modelo y no son rendimientos garantizados. Los resultados reales se aplican solo desde el servidor.',
+    min_invest: 'Inv. Mín.',
+    duration: 'Duración',
+    daily_return: 'Est. Diario',
+    total_return_30: 'Est. 30D',
+    invest_now: 'Invertir Ahora',
+    days: 'días',
+    deposit_title: 'Depósito / Recarga',
+    select_network: 'Seleccionar Red',
+    deposit_address: 'Dirección de Depósito',
+    copy_address: 'Copiar Dirección',
+    amount_usdt: 'Monto (USDT)',
+    i_have_paid: 'He Pagado',
+    submit_deposit: 'Enviar Solicitud',
+    qr_code: 'Código QR',
+    withdraw_title: 'Retirar USDT',
+    wallet_address: 'Dirección de Billetera',
+    network: 'Red',
+    request_withdrawal: 'Solicitar Retiro',
+    fee: 'Comisión',
+    net_amount: 'Recibirá',
+    min_withdrawal: 'Retiro mínimo',
+    invest_title: 'Confirmar Inversión',
+    investment_amount: 'Monto de Inversión',
+    estimated_return: 'Retorno Estimado (30D)',
+    start_date: 'Fecha de Inicio',
+    maturity_date: 'Fecha de Vencimiento',
+    confirm_investment: 'Confirmar Inversión',
+    available_balance: 'Saldo Disponible',
+    my_investments_title: 'Mis Inversiones',
+    no_investments: 'Aún no hay inversiones',
+    no_investments_desc: 'Elija un plan VIP.',
+    status_active: 'Activa',
+    status_completed: 'Completada',
+    status_pending: 'Pendiente',
+    status_verifying: 'Verificando',
+    status_confirmed: 'Confirmado',
+    status_rejected: 'Rechazado',
+    status_processing: 'Procesando',
+    current_return: 'Retorno Actual',
+    history_title: 'Historial de Transacciones',
+    no_transactions: 'Sin transacciones',
+    type_deposit: 'Depósito',
+    type_investment: 'Inversión',
+    type_profit: 'Beneficio',
+    type_withdrawal: 'Retiro',
+    type_referral_reward: 'Recompensa de Referido',
+    type_refund: 'Reembolso',
+    profile_title: 'Mi Perfil',
+    telegram_id: 'ID de Telegram',
+    telegram_name: 'Nombre',
+    wallet_balance: 'Billetera',
+    active_plans: 'Planes Activos',
+    referral_rewards: 'Recompensas',
+    invite_title: 'Invitar Amigos',
+    referral_link: 'Su Enlace de Referido',
+    copy_link: 'Copiar Enlace',
+    share: 'Compartir',
+    total_referrals: 'Total Referidos',
+    active_referrals: 'Referidos Activos',
+    referral_info: 'Gane una recompensa con el primer depósito confirmado de sus referidos. Solo el servidor calcula.',
+    loading: 'Cargando…',
+    success: 'Éxito',
+    error: 'Error',
+    copied: 'Copiado',
+    deposit_submitted: 'Solicitud de depósito enviada.',
+    payment_marked: 'Marcado como pagado.',
+    investment_success: 'Inversión confirmada.',
+    withdrawal_submitted: 'Solicitud de retiro enviada.',
+    insufficient_balance: 'Saldo insuficiente',
+    invalid_amount: 'Ingrese un monto válido',
+    invalid_address: 'Dirección inválida para la red',
+    select_network_err: 'Seleccione una red',
+    close: 'Cerrar',
+    cancel: 'Cancelar',
+    all: 'Todos',
+    retry: 'Reintentar',
+    something_wrong: 'Algo salió mal',
+    plan: 'Plan',
+    tx_id: 'ID de Transacción',
+    view_plans: 'Ver Planes',
+    back: 'Atrás',
+    amount: 'Monto',
+    date: 'Fecha',
+    status: 'Estado',
+    type: 'Tipo',
+  },
+};
+
+const RTL_LANGS = ['fa', 'prs', 'ar'];
+const LANG_LABELS = {
+  en: 'English',
+  fa: 'فارسی',
+  prs: 'دری',
+  ar: 'العربية',
+  ru: 'Русский',
+  tr: 'Türkçe',
+  es: 'Español',
+};
+
+let currentLang = 'en';
+
+function t(key) {
+  return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
+}
+
+function setLanguage(lang) {
+  if (!I18N[lang]) lang = 'en';
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.body.classList.toggle('rtl', RTL_LANGS.includes(lang));
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const k = el.getAttribute('data-i18n');
+    if (k) el.textContent = t(k);
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+  });
+}
+
+  </script>
+  <script>
+/**
+ * NEXORA Firebase Realtime Database layer (REST).
+ * Database: https://usdt-reward-default-rtdb.firebaseio.com/
+ * No local financial storage. All money paths go through RTDB.
+ */
+const NEXORA_FB = (function () {
+  const DB_URL = (window.NEXORA_FIREBASE && window.NEXORA_FIREBASE.databaseURL) ||
+    'https://usdt-reward-default-rtdb.firebaseio.com';
+  const ROOT = DB_URL.replace(/\/$/, '');
+
+  const DEPOSIT_ADDRESSES = {
+    TRC20: { network: 'TRC20', name: 'USDT TRC20 (TRON)', symbol: 'USDT', address: 'TEWQ5CbfvmWe1w3rNLNfJayQBZoNBBsyMk', chain: 'TRON' },
+    BEP20: { network: 'BEP20', name: 'USDT BSC / BEP20', symbol: 'USDT', address: '0x4b01c86c2fe4c114e82f7b616b65277423ca8cc3', chain: 'BSC' },
+    TON: { network: 'TON', name: 'USDT TON', symbol: 'USDT', address: 'UQAN-Iigk-8I3BB_SaUyJgKKw09Lmmv50cXoO_omSQokIxUU', chain: 'TON' },
+    ERC20: { network: 'ERC20', name: 'USDT ERC20 (Ethereum)', symbol: 'USDT', address: '0x4b01c86c2fe4c114e82f7b616b65277423ca8cc3', chain: 'ETH' },
+  };
+
+  const DEFAULT_PLANS = [
+    { id: 1, name: 'VIP 1', min_amount: 10, daily_rate: 5.0, duration_days: 30, sort_order: 1, is_active: true },
+    { id: 2, name: 'VIP 2', min_amount: 25, daily_rate: 5.5, duration_days: 30, sort_order: 2, is_active: true },
+    { id: 3, name: 'VIP 3', min_amount: 50, daily_rate: 6.0, duration_days: 30, sort_order: 3, is_active: true },
+    { id: 4, name: 'VIP 4', min_amount: 100, daily_rate: 6.5, duration_days: 30, sort_order: 4, is_active: true },
+    { id: 5, name: 'VIP 5', min_amount: 250, daily_rate: 7.0, duration_days: 30, sort_order: 5, is_active: true },
+    { id: 6, name: 'VIP 6', min_amount: 500, daily_rate: 7.5, duration_days: 30, sort_order: 6, is_active: true },
+    { id: 7, name: 'VIP 7', min_amount: 1000, daily_rate: 8.0, duration_days: 30, sort_order: 7, is_active: true },
+    { id: 8, name: 'VIP 8', min_amount: 2500, daily_rate: 8.5, duration_days: 30, sort_order: 8, is_active: true },
+    { id: 9, name: 'VIP 9', min_amount: 5000, daily_rate: 9.0, duration_days: 30, sort_order: 9, is_active: true },
+    { id: 10, name: 'VIP 10', min_amount: 10000, daily_rate: 10.0, duration_days: 30, sort_order: 10, is_active: true },
+  ];
+
+  const DEFAULT_CONFIG = {
+    admin_key: 'nexora-admin-secret-change-me',
+    min_deposit: 1,
+    min_withdrawal: 5,
+    withdrawal_fee_percent: 1,
+    referral_percent: 5,
+    bot_username: 'NexoraInvestBot',
+    rates_are_estimates: true,
+  };
+
+  function round2(n) { return Math.round((Number(n) + Number.EPSILON) * 100) / 100; }
+  function nowIso() { return new Date().toISOString(); }
+  function uid(prefix) {
+    return prefix + '-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(16).slice(2, 8).toUpperCase();
+  }
+  function figures(amount, rate, days) {
+    var investment = round2(amount);
+    var daily_profit = round2((investment * rate) / 100);
+    var period_profit = round2(daily_profit * days);
+    return {
+      investment: investment,
+      daily_return: rate,
+      daily_profit: daily_profit,
+      period_profit: period_profit,
+      total_amount: round2(investment + period_profit),
+      duration_days: days,
+    };
+  }
+  function enrichPlan(p) {
+    var f = figures(p.min_amount, p.daily_rate, p.duration_days || 30);
+    return Object.assign({}, p, f, { rates_are_estimates: true });
+  }
+
+  async function req(path, method, body) {
+    var url = ROOT + '/' + path.replace(/^\//, '') + '.json';
+    var opts = { method: method || 'GET' };
+    if (body !== undefined) {
+      opts.headers = { 'Content-Type': 'application/json' };
+      opts.body = JSON.stringify(body);
+    }
+    var res = await fetch(url, opts);
+    if (!res.ok) {
+      var t = await res.text().catch(function () { return ''; });
+      throw new Error('Firebase ' + res.status + (t ? ': ' + t.slice(0, 120) : ''));
+    }
+    if (res.status === 204) return null;
+    var text = await res.text();
+    if (!text) return null;
+    return JSON.parse(text);
+  }
+  function get(path) { return req(path, 'GET'); }
+  function put(path, data) { return req(path, 'PUT', data); }
+  function patch(path, data) { return req(path, 'PATCH', data); }
+  function post(path, data) { return req(path, 'POST', data); }
+  function del(path) { return req(path, 'DELETE'); }
+
+  function mapToArray(obj) {
+    if (!obj) return [];
+    return Object.keys(obj).map(function (k) {
+      var v = obj[k];
+      if (v && typeof v === 'object') return Object.assign({ id: v.id || k, _key: k }, v);
+      return { id: k, _key: k, value: v };
+    });
+  }
+
+  async function ensureBootstrap() {
+    var cfg = await get('nexora/config');
+    if (!cfg) {
+      await put('nexora/config', DEFAULT_CONFIG);
+      cfg = DEFAULT_CONFIG;
+    }
+    var plans = await get('nexora/plans');
+    if (!plans) {
+      var planMap = {};
+      DEFAULT_PLANS.forEach(function (p) { planMap[String(p.id)] = p; });
+      await put('nexora/plans', planMap);
+    }
+    return cfg;
+  }
+
+  async function getConfig() {
+    var cfg = await get('nexora/config');
+    return Object.assign({}, DEFAULT_CONFIG, cfg || {});
+  }
+
+  async function getPlans() {
+    var plans = await get('nexora/plans');
+    var list = mapToArray(plans);
+    if (!list.length) list = DEFAULT_PLANS.slice();
+    list.sort(function (a, b) { return (a.sort_order || a.id) - (b.sort_order || b.id); });
+    return list.filter(function (p) { return p.is_active !== false; }).map(enrichPlan);
+  }
+
+  function genReferralCode() {
+    return 'NX' + Math.random().toString(16).slice(2, 10).toUpperCase();
+  }
+
+  async function findOrCreateUser(tg, refCode) {
+    var tid = String(tg.id);
+    var path = 'nexora/users/' + tid;
+    var existing = await get(path);
+    if (existing) {
+      var profilePatch = {
+        profile: {
+          telegram_id: tid,
+          username: tg.username || existing.profile && existing.profile.username || null,
+          first_name: tg.first_name || existing.profile && existing.profile.first_name || null,
+          last_name: tg.last_name || existing.profile && existing.profile.last_name || null,
+          language: (existing.profile && existing.profile.language) || tg.language_code || 'en',
+        },
+        updated_at: nowIso(),
+      };
+      await patch(path, profilePatch);
+      var fresh = await get(path);
+      return normalizeUser(tid, fresh);
+    }
+
+    var referred_by = null;
+    if (refCode) {
+      var refMap = await get('nexora/referral_codes/' + refCode);
+      if (refMap && refMap.telegram_id && String(refMap.telegram_id) !== tid) {
+        referred_by = String(refMap.telegram_id);
+      }
+    }
+
+    var code = genReferralCode();
+    // ensure unique-ish
+    var tries = 0;
+    while (tries < 5 && (await get('nexora/referral_codes/' + code))) {
+      code = genReferralCode();
+      tries++;
+    }
+
+    var user = {
+      profile: {
+        telegram_id: tid,
+        username: tg.username || null,
+        first_name: tg.first_name || null,
+        last_name: tg.last_name || null,
+        language: tg.language_code || 'en',
+      },
+      wallet: {
+        balance_usdt: 0,
+        total_invested: 0,
+        total_profit: 0,
+        total_referral_rewards: 0,
+        updated_at: nowIso(),
+      },
+      referral_code: code,
+      referred_by: referred_by,
+      created_at: nowIso(),
+      updated_at: nowIso(),
+    };
+    await put(path, user);
+    await put('nexora/referral_codes/' + code, { telegram_id: tid, created_at: nowIso() });
+    return normalizeUser(tid, user);
+  }
+
+  function normalizeUser(tid, data) {
+    data = data || {};
+    var profile = data.profile || {};
+    var wallet = data.wallet || { balance_usdt: 0, total_invested: 0, total_profit: 0, total_referral_rewards: 0 };
+    return {
+      telegram_id: tid,
+      username: profile.username || null,
+      first_name: profile.first_name || null,
+      last_name: profile.last_name || null,
+      language: profile.language || 'en',
+      referral_code: data.referral_code,
+      referred_by: data.referred_by || null,
+      wallet: {
+        balance_usdt: round2(wallet.balance_usdt || 0),
+        total_invested: round2(wallet.total_invested || 0),
+        total_profit: round2(wallet.total_profit || 0),
+        total_referral_rewards: round2(wallet.total_referral_rewards || 0),
+      },
+      created_at: data.created_at,
+    };
+  }
+
+  async function getUser(tid) {
+    var data = await get('nexora/users/' + tid);
+    if (!data) return null;
+    return normalizeUser(String(tid), data);
+  }
+
+  async function setLanguage(tid, lang) {
+    await patch('nexora/users/' + tid + '/profile', { language: lang });
+  }
+
+  async function countActiveInvestments(tid) {
+    var all = mapToArray(await get('nexora/investments'));
+    return all.filter(function (i) { return String(i.user_id) === String(tid) && i.status === 'active'; }).length;
+  }
+
+  async function getStats(tid) {
+    var user = await getUser(tid);
+    if (!user) throw new Error('User not found');
+    var active = await countActiveInvestments(tid);
+    var refs = mapToArray(await get('nexora/users')).filter(function (u) {
+      return u.referred_by && String(u.referred_by) === String(tid);
+    });
+    // active referrals: have active investment
+    var invs = mapToArray(await get('nexora/investments'));
+    var activeRefCount = 0;
+    refs.forEach(function (r) {
+      var rid = r._key || r.profile && r.profile.telegram_id;
+      if (invs.some(function (i) { return String(i.user_id) === String(rid) && i.status === 'active'; })) activeRefCount++;
+    });
+    return {
+      balance: user.wallet.balance_usdt,
+      total_invested: user.wallet.total_invested,
+      total_profit: user.wallet.total_profit,
+      total_referral_rewards: user.wallet.total_referral_rewards,
+      active_investments: active,
+      total_referrals: refs.length,
+      active_referrals: activeRefCount,
+    };
+  }
+
+  async function addTransaction(tid, type, amount, status, meta, refType, refId) {
+    var user = await getUser(tid);
+    var tx = {
+      user_id: String(tid),
+      type: type,
+      amount: amount,
+      balance_after: user ? user.wallet.balance_usdt : 0,
+      status: status || 'completed',
+      tx_id: uid('TX'),
+      reference_type: refType || null,
+      reference_id: refId || null,
+      meta: meta || null,
+      created_at: nowIso(),
+    };
+    var res = await post('nexora/transactions', tx);
+    tx._key = res && res.name;
+    return tx;
+  }
+
+  async function creditWallet(tid, amount, type, meta) {
+    var amt = round2(amount);
+    if (amt <= 0) throw new Error('Invalid credit');
+    var wpath = 'nexora/users/' + tid + '/wallet';
+    var w = (await get(wpath)) || { balance_usdt: 0, total_invested: 0, total_profit: 0, total_referral_rewards: 0 };
+    w.balance_usdt = round2((w.balance_usdt || 0) + amt);
+    if (type === 'profit') w.total_profit = round2((w.total_profit || 0) + amt);
+    if (type === 'referral_reward') w.total_referral_rewards = round2((w.total_referral_rewards || 0) + amt);
+    w.updated_at = nowIso();
+    await put(wpath, w);
+    return addTransaction(tid, type, amt, 'completed', meta);
+  }
+
+  async function debitWallet(tid, amount, type, meta) {
+    var amt = round2(amount);
+    if (amt <= 0) throw new Error('Invalid debit');
+    var wpath = 'nexora/users/' + tid + '/wallet';
+    var w = (await get(wpath)) || { balance_usdt: 0, total_invested: 0, total_profit: 0, total_referral_rewards: 0 };
+    if ((w.balance_usdt || 0) < amt - 0.001) throw new Error('INSUFFICIENT_BALANCE');
+    w.balance_usdt = round2((w.balance_usdt || 0) - amt);
+    if (type === 'investment') w.total_invested = round2((w.total_invested || 0) + amt);
+    w.updated_at = nowIso();
+    await put(wpath, w);
+    return addTransaction(tid, type, -amt, 'completed', meta);
+  }
+
+  async function createDeposit(tid, network, amount) {
+    var cfg = await getConfig();
+    var amt = round2(amount);
+    if (!amt || amt < cfg.min_deposit) throw new Error('Minimum deposit is ' + cfg.min_deposit + ' USDT');
+    var net = DEPOSIT_ADDRESSES[network];
+    if (!net) throw new Error('Invalid network');
+
+    var all = mapToArray(await get('nexora/deposits'));
+    var dup = all.find(function (d) {
+      return String(d.user_id) === String(tid) && d.network === network && Number(d.amount) === amt &&
+        (d.status === 'pending' || d.status === 'verifying') &&
+        d.created_at && (Date.now() - new Date(d.created_at).getTime() < 120000);
+    });
+    if (dup) throw new Error('Duplicate deposit request. Please wait.');
+
+    var dep = {
+      user_id: String(tid),
+      network: network,
+      deposit_address: net.address,
+      amount: amt,
+      tx_id: uid('DEP'),
+      status: 'pending',
+      created_at: nowIso(),
+      updated_at: nowIso(),
+    };
+    var res = await post('nexora/deposits', dep);
+    dep.id = res.name;
+    dep._key = res.name;
+    await addTransaction(tid, 'deposit', amt, 'pending', { network: network }, 'deposit', dep._key);
+    // Balance NOT increased
+    return dep;
+  }
+
+  async function markDepositPaid(tid, depKey) {
+    var dep = await get('nexora/deposits/' + depKey);
+    if (!dep || String(dep.user_id) !== String(tid)) throw new Error('Deposit not found');
+    if (dep.status !== 'pending') throw new Error('Deposit already processed');
+    await patch('nexora/deposits/' + depKey, { status: 'verifying', updated_at: nowIso() });
+    dep.status = 'verifying';
+    dep.id = depKey;
+    dep._key = depKey;
+    return dep;
+  }
+
+  async function confirmDeposit(depKey, note) {
+    var dep = await get('nexora/deposits/' + depKey);
+    if (!dep) throw new Error('Not found');
+    if (dep.status === 'confirmed') throw new Error('Already confirmed');
+    if (dep.status === 'rejected') throw new Error('Already rejected');
+
+    await patch('nexora/deposits/' + depKey, {
+      status: 'confirmed',
+      confirmed_at: nowIso(),
+      updated_at: nowIso(),
+      admin_note: note || null,
+    });
+    await creditWallet(dep.user_id, dep.amount, 'deposit', { network: dep.network, deposit_id: depKey });
+
+    // Referral on first confirmed deposit
+    var user = await getUser(dep.user_id);
+    if (user && user.referred_by) {
+      var deps = mapToArray(await get('nexora/deposits')).filter(function (d) {
+        return String(d.user_id) === String(dep.user_id) && d.status === 'confirmed' && d._key !== depKey;
+      });
+      if (deps.length === 0) {
+        var cfg = await getConfig();
+        var reward = round2((dep.amount * cfg.referral_percent) / 100);
+        if (reward > 0) {
+          await post('nexora/referral_rewards', {
+            user_id: String(user.referred_by),
+            from_user_id: String(dep.user_id),
+            amount: reward,
+            source_type: 'deposit',
+            source_id: depKey,
+            created_at: nowIso(),
+          });
+          await creditWallet(user.referred_by, reward, 'referral_reward', { from: dep.user_id });
+        }
+      }
+    }
+    dep.status = 'confirmed';
+    dep.id = depKey;
+    return dep;
+  }
+
+  async function rejectDeposit(depKey, note) {
+    var dep = await get('nexora/deposits/' + depKey);
+    if (!dep) throw new Error('Not found');
+    if (dep.status === 'confirmed') throw new Error('Already confirmed');
+    await patch('nexora/deposits/' + depKey, { status: 'rejected', admin_note: note || 'Rejected', updated_at: nowIso() });
+    dep.status = 'rejected';
+    dep.id = depKey;
+    return dep;
+  }
+
+  async function createInvestment(tid, planId, amount) {
+    var plans = await getPlans();
+    var plan = plans.find(function (p) { return Number(p.id) === Number(planId); });
+    if (!plan) throw new Error('Invalid plan');
+    var amt = round2(amount);
+    if (!amt || amt < plan.min_amount) throw new Error('Minimum amount is ' + plan.min_amount + ' USDT');
+    var f = figures(amt, plan.daily_rate, plan.duration_days || 30);
+
+    await debitWallet(tid, amt, 'investment', { plan: plan.name });
+
+    var start = new Date();
+    var mat = new Date(start);
+    mat.setDate(mat.getDate() + (plan.duration_days || 30));
+    var inv = {
+      user_id: String(tid),
+      plan_id: plan.id,
+      plan_name: plan.name,
+      amount: amt,
+      daily_rate: plan.daily_rate,
+      duration_days: plan.duration_days || 30,
+      daily_profit: f.daily_profit,
+      period_profit: f.period_profit,
+      total_amount: f.total_amount,
+      start_date: start.toISOString(),
+      maturity_date: mat.toISOString(),
+      current_profit: 0,
+      last_accrual_date: start.toISOString().slice(0, 10),
+      status: 'active',
+      created_at: nowIso(),
+    };
+    var res = await post('nexora/investments', inv);
+    inv.id = res.name;
+    inv._key = res.name;
+    return inv;
+  }
+
+  /**
+   * Accrue daily profits using investment dates stored in Firebase.
+   * Credits wallet via Firebase writes only — deterministic formula, no client-invented amounts.
+   */
+  async function accrueProfits(tid) {
+    var invs = mapToArray(await get('nexora/investments')).filter(function (i) {
+      return String(i.user_id) === String(tid) && i.status === 'active';
+    });
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    for (var n = 0; n < invs.length; n++) {
+      var inv = invs[n];
+      var key = inv._key;
+      var start = new Date(inv.start_date);
+      start.setHours(0, 0, 0, 0);
+      var maturity = new Date(inv.maturity_date);
+      var daily = round2((inv.amount * inv.daily_rate) / 100);
+      var cursor = new Date(start);
+      cursor.setDate(cursor.getDate() + 1);
+      var endBound = today < maturity ? today : new Date(new Date(maturity).setHours(0, 0, 0, 0));
+      var last = inv.last_accrual_date || inv.start_date.slice(0, 10);
+      var added = 0;
+
+      // Load existing profit dates for this investment
+      var profits = mapToArray(await get('nexora/profits')).filter(function (p) {
+        return p.investment_id === key;
+      });
+      var profitDates = {};
+      profits.forEach(function (p) { profitDates[p.profit_date] = true; });
+
+      while (cursor <= endBound) {
+        var ds = cursor.toISOString().slice(0, 10);
+        if (!profitDates[ds] && ds > last.split('T')[0]) {
+          // only if not already recorded — also allow if last_accrual is start
+        }
+        if (!profitDates[ds]) {
+          await post('nexora/profits', {
+            user_id: String(tid),
+            investment_id: key,
+            amount: daily,
+            profit_date: ds,
+            created_at: nowIso(),
+          });
+          await creditWallet(tid, daily, 'profit', { investment_id: key, profit_date: ds });
+          added = round2(added + daily);
+          profitDates[ds] = true;
+        }
+        cursor.setDate(cursor.getDate() + 1);
+      }
+
+      var patchData = { last_accrual_date: endBound.toISOString().slice(0, 10) };
+      if (added > 0) {
+        patchData.current_profit = round2((inv.current_profit || 0) + added);
+      }
+      if (new Date() >= maturity) {
+        patchData.status = 'completed';
+      }
+      await patch('nexora/investments/' + key, patchData);
+    }
+  }
+
+  async function getInvestments(tid) {
+    await accrueProfits(tid);
+    var list = mapToArray(await get('nexora/investments'))
+      .filter(function (i) { return String(i.user_id) === String(tid); })
+      .sort(function (a, b) { return (b.created_at || '').localeCompare(a.created_at || ''); });
+    return list.map(function (i) {
+      var f = figures(i.amount, i.daily_rate, i.duration_days || 30);
+      return Object.assign({}, i, {
+        daily_profit: i.daily_profit != null ? i.daily_profit : f.daily_profit,
+        period_profit: i.period_profit != null ? i.period_profit : f.period_profit,
+        total_amount: i.total_amount != null ? i.total_amount : f.total_amount,
+        current_profit: round2(i.current_profit || 0),
+        total_profit: round2(i.current_profit || 0),
+      });
+    });
+  }
+
+  function isValidAddress(network, address) {
+    if (!address) return false;
+    var a = address.trim();
+    if (network === 'TRC20') return /^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(a);
+    if (network === 'BEP20' || network === 'ERC20') return /^0x[a-fA-F0-9]{40}$/.test(a);
+    if (network === 'TON') return /^(UQ|EQ)[A-Za-z0-9_-]{46}$/.test(a) || /^[A-Za-z0-9_-]{48}$/.test(a);
+    return false;
+  }
+
+  async function createWithdrawal(tid, amount, address, network) {
+    var cfg = await getConfig();
+    var amt = round2(amount);
+    if (!amt || amt < cfg.min_withdrawal) throw new Error('Minimum withdrawal is ' + cfg.min_withdrawal + ' USDT');
+    if (!isValidAddress(network, address)) throw new Error('Invalid wallet address for selected network');
+    var fee = round2((amt * cfg.withdrawal_fee_percent) / 100);
+    var netAmount = round2(amt - fee);
+    if (netAmount <= 0) throw new Error('Amount too low after fees');
+
+    var all = mapToArray(await get('nexora/withdrawals'));
+    var dup = all.find(function (w) {
+      return String(w.user_id) === String(tid) && Number(w.amount) === amt && w.wallet_address === address.trim() &&
+        w.status === 'pending' && w.created_at && (Date.now() - new Date(w.created_at).getTime() < 120000);
+    });
+    if (dup) throw new Error('Duplicate withdrawal request');
+
+    await debitWallet(tid, amt, 'withdrawal', { network: network, address: address.trim() });
+
+    var wd = {
+      user_id: String(tid),
+      amount: amt,
+      fee: fee,
+      net_amount: netAmount,
+      wallet_address: address.trim(),
+      network: network,
+      status: 'pending',
+      tx_hash: null,
+      created_at: nowIso(),
+      updated_at: nowIso(),
+    };
+    var res = await post('nexora/withdrawals', wd);
+    wd.id = res.name;
+    wd._key = res.name;
+    return wd;
+  }
+
+  async function setWithdrawalStatus(wdKey, status, txHash, note) {
+    var wd = await get('nexora/withdrawals/' + wdKey);
+    if (!wd) throw new Error('Not found');
+    if (wd.status === 'completed' || wd.status === 'rejected') throw new Error('Already final');
+    if (status === 'completed') {
+      await patch('nexora/withdrawals/' + wdKey, {
+        status: 'completed', tx_hash: txHash || null, admin_note: note || null,
+        processed_at: nowIso(), updated_at: nowIso(),
+      });
+    } else if (status === 'processing') {
+      await patch('nexora/withdrawals/' + wdKey, { status: 'processing', updated_at: nowIso(), admin_note: note || null });
+    } else if (status === 'rejected') {
+      await patch('nexora/withdrawals/' + wdKey, { status: 'rejected', admin_note: note || 'Rejected', processed_at: nowIso(), updated_at: nowIso() });
+      await creditWallet(wd.user_id, wd.amount, 'refund', { reason: 'withdrawal_rejected', withdrawal_id: wdKey });
+    } else throw new Error('Invalid status');
+    wd.status = status;
+    wd.id = wdKey;
+    return wd;
+  }
+
+  async function getTransactions(tid) {
+    var list = mapToArray(await get('nexora/transactions'))
+      .filter(function (t) { return String(t.user_id) === String(tid); })
+      .sort(function (a, b) { return (b.created_at || '').localeCompare(a.created_at || ''); });
+    return list.slice(0, 100);
+  }
+
+  async function getReferral(tid) {
+    var user = await getUser(tid);
+    var stats = await getStats(tid);
+    var cfg = await getConfig();
+    return {
+      referral_code: user.referral_code,
+      total_referrals: stats.total_referrals,
+      active_referrals: stats.active_referrals,
+      referral_rewards: stats.total_referral_rewards,
+      referral_link: 'https://t.me/' + cfg.bot_username + '?start=' + user.referral_code,
+      referral_percent: cfg.referral_percent,
+    };
+  }
+
+  async function adminVerifyKey(key) {
+    var cfg = await getConfig();
+    return key && key === cfg.admin_key;
+  }
+
+  async function adminList(path) {
+    return mapToArray(await get('nexora/' + path));
+  }
+
+  async function adminStats() {
+    var users = mapToArray(await get('nexora/users'));
+    var deposits = mapToArray(await get('nexora/deposits'));
+    var withdrawals = mapToArray(await get('nexora/withdrawals'));
+    var investments = mapToArray(await get('nexora/investments'));
+    var totalBal = 0;
+    users.forEach(function (u) {
+      var w = u.wallet || {};
+      totalBal += Number(w.balance_usdt || 0);
+    });
+    function countStatus(arr, s) { return arr.filter(function (x) { return x.status === s; }).length; }
+    function sumStatus(arr, s, field) {
+      return arr.filter(function (x) { return x.status === s; }).reduce(function (a, x) { return a + Number(x[field] || 0); }, 0);
+    }
+    return {
+      users: users.length,
+      total_balances: round2(totalBal),
+      deposits: {
+        total: deposits.length,
+        pending: countStatus(deposits, 'pending'),
+        verifying: countStatus(deposits, 'verifying'),
+        confirmed: countStatus(deposits, 'confirmed'),
+        volume: round2(sumStatus(deposits, 'confirmed', 'amount')),
+      },
+      withdrawals: {
+        total: withdrawals.length,
+        pending: countStatus(withdrawals, 'pending'),
+        processing: countStatus(withdrawals, 'processing'),
+        volume: round2(sumStatus(withdrawals, 'completed', 'amount')),
+      },
+      investments: {
+        total: investments.length,
+        active: countStatus(investments, 'active'),
+        active_volume: round2(sumStatus(investments, 'active', 'amount')),
+      },
+    };
+  }
+
+  async function savePlan(id, data) {
+    await patch('nexora/plans/' + id, data);
+    return get('nexora/plans/' + id);
+  }
+
+  return {
+    DB_URL: ROOT,
+    DEPOSIT_ADDRESSES: DEPOSIT_ADDRESSES,
+    DEFAULT_PLANS: DEFAULT_PLANS,
+    ensureBootstrap: ensureBootstrap,
+    getConfig: getConfig,
+    getPlans: getPlans,
+    findOrCreateUser: findOrCreateUser,
+    getUser: getUser,
+    setLanguage: setLanguage,
+    getStats: getStats,
+    createDeposit: createDeposit,
+    markDepositPaid: markDepositPaid,
+    confirmDeposit: confirmDeposit,
+    rejectDeposit: rejectDeposit,
+    createInvestment: createInvestment,
+    getInvestments: getInvestments,
+    accrueProfits: accrueProfits,
+    createWithdrawal: createWithdrawal,
+    setWithdrawalStatus: setWithdrawalStatus,
+    getTransactions: getTransactions,
+    getReferral: getReferral,
+    adminVerifyKey: adminVerifyKey,
+    adminList: adminList,
+    adminStats: adminStats,
+    savePlan: savePlan,
+    figures: figures,
+    enrichPlan: enrichPlan,
+    round2: round2,
+    mapToArray: mapToArray,
+    get: get,
+    put: put,
+    patch: patch,
+  };
+})();
+
+  </script>
+  <script>
+
+(function () {
+  'use strict';
+  var state = {
+    user: null,
+    stats: null,
+    plans: [],
+    networks: [],
+    txFilter: 'all',
+    selectedNetwork: null,
+    tid: null
+  };
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    try {
+      tg.ready(); tg.expand();
+      if (tg.setHeaderColor) tg.setHeaderColor('#0B1220');
+      if (tg.setBackgroundColor) tg.setBackgroundColor('#F8FAFC');
+    } catch (e) {}
+  }
+
+  function fmt(n, d) {
+    d = d == null ? 2 : d;
+    var x = Number(n);
+    if (!isFinite(x)) return (0).toFixed(d);
+    return x.toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+  function fmtUsdt(n, d) { return fmt(n, d) + ' USDT'; }
+  function round2(n) { return Math.round((Number(n) + Number.EPSILON) * 100) / 100; }
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    try {
+      var loc = currentLang === 'fa' || currentLang === 'prs' ? 'fa-IR' : currentLang === 'ar' ? 'ar' : undefined;
+      return new Date(iso).toLocaleString(loc, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    } catch (e) { return String(iso).slice(0, 16).replace('T', ' '); }
+  }
+  function toast(msg, type) {
+    var el = document.createElement('div');
+    el.className = 'toast ' + (type || 'info');
+    el.textContent = msg;
+    $('#toastContainer').appendChild(el);
+    setTimeout(function () {
+      el.style.opacity = '0'; el.style.transition = 'opacity .3s';
+      setTimeout(function () { el.remove(); }, 300);
+    }, 3200);
+  }
+  function openModal(title, html) {
+    $('#modalTitle').textContent = title;
+    $('#modalBody').innerHTML = html;
+    $('#modalOverlay').classList.add('open');
+  }
+  function closeModal() { $('#modalOverlay').classList.remove('open'); }
+
+  function navigate(page) {
+    $$('.page').forEach(function (p) { p.classList.remove('active'); });
+    $$('.nav-item').forEach(function (n) { n.classList.toggle('active', n.dataset.page === page); });
+    var el = $('#page-' + page); if (el) el.classList.add('active');
+    if (page === 'investments') loadInvestments();
+    if (page === 'history') loadTransactions();
+    if (page === 'referral') loadReferral();
+    if (page === 'profile') renderProfile();
+    if (page === 'home') refreshDashboard();
+    window.scrollTo(0, 0);
+  }
+
+  function updateBalanceUI() {
+    var s = state.stats || { balance: 0, total_profit: 0, total_invested: 0, active_investments: 0 };
+    $('#balTotal').innerHTML = fmt(s.balance) + '<span>USDT</span>';
+    $('#balProfit').textContent = fmt(s.total_profit);
+    $('#balInvested').textContent = fmt(s.total_invested);
+    $('#balActive').textContent = String(s.active_investments || 0);
+  }
+
+  function fig(label, value, cls) {
+    return '<div class="plan-fig-row"><span class="plan-fig-label">' + label + '</span><span class="plan-fig-value' + (cls ? ' ' + cls : '') + '">' + value + '</span></div>';
+  }
+
+  function renderPlans() {
+    var grid = $('#plansGrid');
+    if (!state.plans.length) {
+      grid.innerHTML = '<div class="empty-state"><p>' + t('loading') + '</p></div>';
+      return;
+    }
+    grid.innerHTML = state.plans.map(function (p) {
+      var high = p.sort_order >= 7;
+      var inv = p.investment != null ? p.investment : p.min_amount;
+      var dailyProfit = p.daily_profit != null ? p.daily_profit : round2((inv * p.daily_rate) / 100);
+      var periodProfit = p.period_profit != null ? p.period_profit : round2(dailyProfit * (p.duration_days || 30));
+      var totalAmount = p.total_amount != null ? p.total_amount : round2(Number(inv) + Number(periodProfit));
+      return '<div class="plan-card"><div class="plan-top"><span class="plan-badge ' + (high ? 'vip-high' : '') + '">' + p.name +
+        '</span><div class="plan-rate"><div class="plan-rate-val">' + fmt(p.daily_rate, 1) + '%</div><div class="plan-rate-label">' + t('daily_return') +
+        '</div></div></div><div class="plan-figures">' +
+        fig(t('investment_label'), fmtUsdt(inv)) +
+        fig(t('daily_return'), fmt(p.daily_rate, 1) + '%') +
+        fig(t('daily_profit'), fmtUsdt(dailyProfit), 'green') +
+        fig(t('period_profit'), fmtUsdt(periodProfit), 'green') +
+        fig(t('total_amount'), fmtUsdt(totalAmount), 'emphasis') +
+        fig(t('duration'), (p.duration_days || 30) + ' ' + t('days')) +
+        '</div><button class="btn btn-primary btn-block btn-invest" data-plan-id="' + p.id + '">' + t('invest_now') + '</button></div>';
+    }).join('');
+    grid.querySelectorAll('.btn-invest').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var plan = state.plans.find(function (x) { return Number(x.id) === Number(btn.dataset.planId); });
+        if (plan) openInvestModal(plan);
+      });
+    });
+  }
+
+  function networksFromConfig() {
+    return Object.keys(NEXORA_FB.DEPOSIT_ADDRESSES).map(function (k) {
+      var n = NEXORA_FB.DEPOSIT_ADDRESSES[k];
+      return { network: n.network, name: n.name, symbol: n.symbol, address: n.address, chain: n.chain };
+    });
+  }
+
+  async function openDepositModal() {
+    state.networks = networksFromConfig();
+    state.selectedNetwork = state.networks[0].network;
+    openModal(t('deposit_title'),
+      '<div class="form-group"><label class="form-label">' + t('select_network') + '</label><div class="network-grid" id="netGrid">' +
+      state.networks.map(function (n, i) {
+        return '<div class="network-option ' + (i === 0 ? 'active' : '') + '" data-net="' + n.network + '"><div class="network-option-name">' + n.network +
+          '</div><div class="network-option-chain">' + n.chain + ' · USDT</div></div>';
+      }).join('') +
+      '</div></div><div class="form-group"><label class="form-label">' + t('deposit_address') + '</label><div class="address-box" id="depAddress">' +
+      state.networks[0].address + '</div><div class="address-actions"><button class="btn btn-outline btn-sm" id="btnCopyAddr" style="flex:1">' +
+      t('copy_address') + '</button></div></div><div class="qr-wrap" id="qrWrap"></div>' +
+      '<div class="form-group"><label class="form-label">' + t('amount_usdt') +
+      '</label><input type="number" class="form-input" id="depAmount" min="1" step="0.01" inputmode="decimal" /></div>' +
+      '<p class="form-hint" style="margin-bottom:12px">' + t('deposit_wait_verify') + '</p>' +
+      '<button class="btn btn-primary btn-block" id="btnSubmitDep">' + t('submit_deposit') +
+      '</button><div id="depResult" style="margin-top:14px;display:none"></div>');
+    showQR(state.networks[0].address);
+    $('#netGrid').addEventListener('click', function (e) {
+      var opt = e.target.closest('.network-option'); if (!opt) return;
+      $$('#netGrid .network-option').forEach(function (o) { o.classList.remove('active'); });
+      opt.classList.add('active');
+      state.selectedNetwork = opt.dataset.net;
+      var net = state.networks.find(function (n) { return n.network === state.selectedNetwork; });
+      $('#depAddress').textContent = net.address;
+      showQR(net.address);
+    });
+    $('#btnCopyAddr').addEventListener('click', function () { copyText($('#depAddress').textContent.trim()); });
+    $('#btnSubmitDep').addEventListener('click', submitDeposit);
+  }
+
+  function showQR(address) {
+    var wrap = $('#qrWrap');
+    if (!wrap) return;
+    var src = 'https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=8&data=' + encodeURIComponent(address);
+    wrap.innerHTML = '<img src="' + src + '" alt="QR" width="180" height="180" />';
+  }
+
+  async function submitDeposit() {
+    var amount = Number($('#depAmount').value);
+    if (!amount || amount <= 0) return toast(t('invalid_amount'), 'error');
+    if (!state.selectedNetwork) return toast(t('select_network_err'), 'error');
+    var btn = $('#btnSubmitDep');
+    btn.disabled = true; btn.textContent = t('loading');
+    try {
+      var dep = await NEXORA_FB.createDeposit(state.tid, state.selectedNetwork, amount);
+      toast(t('deposit_submitted'), 'success');
+      var res = $('#depResult');
+      res.style.display = 'block';
+      res.innerHTML = '<div class="card"><div class="detail-rows">' +
+        '<div class="detail-row"><span class="detail-label">' + t('tx_id') + '</span><span class="detail-value">' + dep.tx_id + '</span></div>' +
+        '<div class="detail-row"><span class="detail-label">' + t('status') + '</span><span class="badge badge-pending">' + t('status_pending') + '</span></div>' +
+        '<div class="detail-row"><span class="detail-label">' + t('amount') + '</span><span class="detail-value">' + fmtUsdt(dep.amount) + '</span></div></div>' +
+        '<button class="btn btn-success btn-block" id="btnPaid" style="margin-top:12px">' + t('i_have_paid') + '</button>' +
+        '<p class="form-hint" style="margin-top:8px">' + t('deposit_wait_verify') + '</p></div>';
+      $('#btnPaid').addEventListener('click', async function () {
+        try {
+          await NEXORA_FB.markDepositPaid(state.tid, dep._key || dep.id);
+          toast(t('payment_marked'), 'success');
+          $('#btnPaid').disabled = true;
+          $('#btnPaid').textContent = t('status_verifying');
+          var badge = res.querySelector('.badge');
+          if (badge) { badge.className = 'badge badge-verifying'; badge.textContent = t('status_verifying'); }
+        } catch (e) { toast(e.message, 'error'); }
+      });
+      state.stats = await NEXORA_FB.getStats(state.tid);
+      updateBalanceUI();
+    } catch (e) { toast(e.message, 'error'); }
+    finally { btn.disabled = false; btn.textContent = t('submit_deposit'); }
+  }
+
+  function openWithdrawModal() {
+    var feePct = 1;
+    var nets = ['TRC20', 'BEP20', 'ERC20', 'TON'];
+    var wdNet = 'TRC20';
+    openModal(t('withdraw_title'),
+      '<div class="form-group"><label class="form-label">' + t('available_balance') + '</label><div class="address-box">' +
+      fmtUsdt(state.stats && state.stats.balance) + '</div></div>' +
+      '<div class="form-group"><label class="form-label">' + t('network') + '</label><div class="network-grid" id="wdNetGrid">' +
+      nets.map(function (n, i) {
+        return '<div class="network-option ' + (i === 0 ? 'active' : '') + '" data-net="' + n + '"><div class="network-option-name">' + n + '</div></div>';
+      }).join('') +
+      '</div></div><div class="form-group"><label class="form-label">' + t('wallet_address') +
+      '</label><input type="text" class="form-input" id="wdAddress" autocomplete="off" spellcheck="false" /></div>' +
+      '<div class="form-group"><label class="form-label">' + t('amount_usdt') +
+      '</label><input type="number" class="form-input" id="wdAmount" min="5" step="0.01" inputmode="decimal" />' +
+      '<div class="form-hint">' + t('min_withdrawal') + ': 5 USDT · ' + t('fee') + ': ' + feePct + '%</div></div>' +
+      '<div class="detail-rows card" style="margin-bottom:14px;padding:12px 14px">' +
+      '<div class="detail-row"><span class="detail-label">' + t('fee') + '</span><span class="detail-value" id="wdFee">0.00 USDT</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('net_amount') + '</span><span class="detail-value amount-pos" id="wdNet">0.00 USDT</span></div></div>' +
+      '<button class="btn btn-primary btn-block" id="btnSubmitWd">' + t('request_withdrawal') + '</button>');
+    $('#wdNetGrid').addEventListener('click', function (e) {
+      var opt = e.target.closest('.network-option'); if (!opt) return;
+      $$('#wdNetGrid .network-option').forEach(function (o) { o.classList.remove('active'); });
+      opt.classList.add('active'); wdNet = opt.dataset.net;
+    });
+    $('#wdAmount').addEventListener('input', function () {
+      var amt = Number($('#wdAmount').value) || 0;
+      var fee = Math.round(amt * feePct * 100) / 100;
+      $('#wdFee').textContent = fmtUsdt(fee);
+      $('#wdNet').textContent = fmtUsdt(Math.max(0, amt - fee));
+    });
+    $('#btnSubmitWd').addEventListener('click', async function () {
+      var amount = Number($('#wdAmount').value);
+      var address = ($('#wdAddress').value || '').trim();
+      if (!amount || amount <= 0) return toast(t('invalid_amount'), 'error');
+      if (!address) return toast(t('invalid_address'), 'error');
+      var btn = $('#btnSubmitWd'); btn.disabled = true;
+      try {
+        await NEXORA_FB.createWithdrawal(state.tid, amount, address, wdNet);
+        state.stats = await NEXORA_FB.getStats(state.tid);
+        updateBalanceUI();
+        toast(t('withdrawal_submitted'), 'success');
+        closeModal();
+      } catch (e) {
+        toast(e.message === 'INSUFFICIENT_BALANCE' ? t('insufficient_balance') : e.message, 'error');
+      } finally { btn.disabled = false; }
+    });
+  }
+
+  function openInvestModal(plan) {
+    var start = new Date();
+    var mat = new Date(start);
+    mat.setDate(mat.getDate() + (plan.duration_days || 30));
+    var min = plan.min_amount;
+    function figuresFor(amount) {
+      var dailyProfit = round2((amount * plan.daily_rate) / 100);
+      var period = round2(dailyProfit * (plan.duration_days || 30));
+      return { dailyProfit: dailyProfit, period: period, total: round2(amount + period) };
+    }
+    var initial = figuresFor(min);
+    openModal(t('invest_title'),
+      '<div class="plan-badge" style="margin-bottom:14px">' + plan.name + '</div>' +
+      '<div class="form-group"><label class="form-label">' + t('available_balance') + '</label><div class="address-box">' +
+      fmtUsdt(state.stats && state.stats.balance) + '</div></div>' +
+      '<div class="form-group"><label class="form-label">' + t('investment_amount') +
+      '</label><input type="number" class="form-input" id="invAmount" min="' + min + '" step="0.01" value="' + min +
+      '" inputmode="decimal" /><div class="form-hint">' + t('min_invest') + ': ' + fmtUsdt(min) + '</div></div>' +
+      '<div class="detail-rows card" style="padding:12px 14px;margin-bottom:14px">' +
+      '<div class="detail-row"><span class="detail-label">' + t('duration') + '</span><span class="detail-value">' + (plan.duration_days || 30) + ' ' + t('days') + '</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('daily_return') + '</span><span class="detail-value amount-pos">' + fmt(plan.daily_rate, 1) + '%</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('daily_profit') + '</span><span class="detail-value amount-pos" id="invDaily">' + fmtUsdt(initial.dailyProfit) + '</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('period_profit') + '</span><span class="detail-value amount-pos" id="invPeriod">' + fmtUsdt(initial.period) + '</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('total_amount') + '</span><span class="detail-value" id="invTotal">' + fmtUsdt(initial.total) + '</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('fee') + '</span><span class="detail-value">0.00 USDT</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('start_date') + '</span><span class="detail-value">' + fmtDate(start.toISOString()) + '</span></div>' +
+      '<div class="detail-row"><span class="detail-label">' + t('maturity_date') + '</span><span class="detail-value">' + fmtDate(mat.toISOString()) + '</span></div></div>' +
+      '<div class="disclaimer" style="margin-bottom:14px">' + t('disclaimer') + '</div>' +
+      '<button class="btn btn-primary btn-block" id="btnConfirmInv">' + t('confirm_investment') + '</button>');
+    $('#invAmount').addEventListener('input', function () {
+      var f = figuresFor(Number($('#invAmount').value) || 0);
+      $('#invDaily').textContent = fmtUsdt(f.dailyProfit);
+      $('#invPeriod').textContent = fmtUsdt(f.period);
+      $('#invTotal').textContent = fmtUsdt(f.total);
+    });
+    $('#btnConfirmInv').addEventListener('click', async function () {
+      var amount = Number($('#invAmount').value);
+      if (!amount || amount < min) return toast(t('invalid_amount'), 'error');
+      var btn = $('#btnConfirmInv');
+      btn.disabled = true; btn.textContent = t('loading');
+      try {
+        await NEXORA_FB.createInvestment(state.tid, plan.id, amount);
+        state.stats = await NEXORA_FB.getStats(state.tid);
+        updateBalanceUI();
+        toast(t('investment_success'), 'success');
+        closeModal();
+      } catch (e) {
+        toast(e.message === 'INSUFFICIENT_BALANCE' ? t('insufficient_balance') : e.message, 'error');
+      } finally {
+        btn.disabled = false; btn.textContent = t('confirm_investment');
+      }
+    });
+  }
+
+  function row(label, value, cls) {
+    return '<div class="list-item-row"><span class="list-item-sub">' + label + '</span><span class="' + (cls || 'list-item-sub') + '">' + value + '</span></div>';
+  }
+
+  async function loadInvestments() {
+    var list = $('#investmentsList');
+    list.innerHTML = '<div class="empty-state"><div class="spinner"></div></div>';
+    try {
+      var investments = await NEXORA_FB.getInvestments(state.tid);
+      state.stats = await NEXORA_FB.getStats(state.tid);
+      updateBalanceUI();
+      if (!investments.length) {
+        list.innerHTML = '<div class="empty-state"><p>' + t('no_investments') + '</p><button class="btn btn-primary btn-sm" style="margin-top:12px" id="btnGoPlans">' + t('view_plans') + '</button></div>';
+        var b = $('#btnGoPlans'); if (b) b.addEventListener('click', function () { navigate('home'); });
+        return;
+      }
+      list.innerHTML = investments.map(function (inv) {
+        var dailyProfit = inv.daily_profit != null ? inv.daily_profit : round2((inv.amount * inv.daily_rate) / 100);
+        var current = inv.current_profit || 0;
+        var totalP = inv.period_profit != null ? inv.period_profit : round2(dailyProfit * inv.duration_days);
+        return '<div class="list-item"><div class="list-item-row"><span class="list-item-title">' + inv.plan_name +
+          '</span><span class="badge badge-' + inv.status + '">' + (t('status_' + inv.status) || inv.status) + '</span></div>' +
+          row(t('investment_label'), fmtUsdt(inv.amount)) +
+          row(t('duration'), inv.duration_days + ' ' + t('days')) +
+          row(t('daily_return'), fmt(inv.daily_rate, 1) + '%') +
+          row(t('daily_profit'), fmtUsdt(dailyProfit), 'amount-pos') +
+          row(t('current_profit'), '+' + fmtUsdt(current), 'amount-pos') +
+          row(t('period_profit'), fmtUsdt(totalP), 'amount-pos') +
+          row(t('start_date'), fmtDate(inv.start_date)) +
+          row(t('maturity_date'), fmtDate(inv.maturity_date)) + '</div>';
+      }).join('');
+    } catch (e) {
+      list.innerHTML = '<div class="error-state"><p>' + e.message + '</p></div>';
+    }
+  }
+
+  async function loadTransactions() {
+    var list = $('#txList');
+    list.innerHTML = '<div class="empty-state"><div class="spinner"></div></div>';
+    try {
+      var rows = await NEXORA_FB.getTransactions(state.tid);
+      if (state.txFilter !== 'all') rows = rows.filter(function (r) { return r.type === state.txFilter; });
+      if (!rows.length) {
+        list.innerHTML = '<div class="empty-state"><p>' + t('no_transactions') + '</p></div>';
+        return;
+      }
+      list.innerHTML = rows.map(function (tx) {
+        var isOut = tx.type === 'investment' || tx.type === 'withdrawal';
+        var abs = Math.abs(tx.amount);
+        var st = tx.status === 'completed' || tx.status === 'confirmed' ? 'confirmed' : tx.status;
+        return '<div class="list-item"><div class="list-item-row"><span class="list-item-title">' + (t('type_' + tx.type) || tx.type) +
+          '</span><span class="' + (isOut ? 'amount-neg' : 'amount-pos') + '">' + (isOut ? '−' : '+') + fmtUsdt(abs) + '</span></div>' +
+          '<div class="list-item-row"><span class="list-item-sub">' + fmtDate(tx.created_at) + '</span><span class="badge badge-' + st + '">' +
+          (t('status_' + tx.status) || tx.status) + '</span></div>' +
+          '<div class="list-item-row"><span class="list-item-sub">' + t('tx_id') + '</span><span class="list-item-sub" style="font-family:monospace;font-size:10px">' +
+          (tx.tx_id || '—') + '</span></div></div>';
+      }).join('');
+    } catch (e) {
+      list.innerHTML = '<div class="error-state"><p>' + e.message + '</p></div>';
+    }
+  }
+
+  async function loadReferral() {
+    try {
+      var data = await NEXORA_FB.getReferral(state.tid);
+      $('#refLink').textContent = data.referral_link;
+      $('#refStats').innerHTML =
+        '<div class="stat-card"><div class="stat-card-val">' + data.total_referrals + '</div><div class="stat-card-label">' + t('total_referrals') + '</div></div>' +
+        '<div class="stat-card"><div class="stat-card-val">' + data.active_referrals + '</div><div class="stat-card-label">' + t('active_referrals') + '</div></div>' +
+        '<div class="stat-card"><div class="stat-card-val">' + fmt(data.referral_rewards) + '</div><div class="stat-card-label">' + t('referral_rewards') + ' USDT</div></div>' +
+        '<div class="stat-card"><div class="stat-card-val">' + (data.referral_percent || 5) + '%</div><div class="stat-card-label">Reward Rate</div></div>';
+      state._refLink = data.referral_link;
+    } catch (e) { toast(e.message, 'error'); }
+  }
+
+  function renderProfile() {
+    var u = state.user || {};
+    var s = state.stats || {};
+    var name = [u.first_name, u.last_name].filter(Boolean).join(' ') || u.username || ('ID ' + (u.telegram_id || '—'));
+    $('#profileName').textContent = name;
+    $('#profileTgId').textContent = t('telegram_id') + ': ' + (u.telegram_id || '—');
+    $('#profileAvatar').textContent = (name[0] || 'N').toUpperCase();
+    $('#profileStats').innerHTML =
+      '<div class="stat-card"><div class="stat-card-val">' + fmt(s.balance) + '</div><div class="stat-card-label">' + t('wallet_balance') + ' USDT</div></div>' +
+      '<div class="stat-card"><div class="stat-card-val">' + fmt(s.total_invested) + '</div><div class="stat-card-label">' + t('total_invested') + ' USDT</div></div>' +
+      '<div class="stat-card"><div class="stat-card-val">' + fmt(s.total_profit) + '</div><div class="stat-card-label">' + t('total_profit') + ' USDT</div></div>' +
+      '<div class="stat-card"><div class="stat-card-val">' + (s.active_investments || 0) + '</div><div class="stat-card-label">' + t('active_plans') + '</div></div>' +
+      '<div class="stat-card"><div class="stat-card-val">' + fmt(s.total_referral_rewards) + '</div><div class="stat-card-label">' + t('referral_rewards') + ' USDT</div></div>' +
+      '<div class="stat-card"><div class="stat-card-val">' + (u.username ? '@' + u.username : '—') + '</div><div class="stat-card-label">' + t('telegram_name') + '</div></div>';
+  }
+
+  async function refreshDashboard() {
+    try {
+      await NEXORA_FB.accrueProfits(state.tid);
+      state.stats = await NEXORA_FB.getStats(state.tid);
+      state.plans = await NEXORA_FB.getPlans();
+      updateBalanceUI();
+      renderPlans();
+    } catch (e) {
+      console.error(e);
+      toast(e.message, 'error');
+    }
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { toast(t('copied'), 'success'); }).catch(function () { fallbackCopy(text); });
+    } else fallbackCopy(text);
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); toast(t('copied'), 'success'); } catch (e) { toast(text, 'info'); }
+    ta.remove();
+  }
+  function getRef() {
+    var params = new URLSearchParams(location.search);
+    if (params.get('ref')) return params.get('ref');
+    if (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) return tg.initDataUnsafe.start_param;
+    return null;
+  }
+  function showAuthGate(msg) {
+    var app = $('#app');
+    if (app) app.style.display = 'none';
+    var gate = $('#authGate');
+    if (!gate) {
+      gate = document.createElement('div');
+      gate.id = 'authGate';
+      gate.className = 'auth-gate';
+      document.body.appendChild(gate);
+    }
+    gate.innerHTML = '<h1>NEXORA</h1><p><strong>' + t('auth_required_title') + '</strong></p><p>' + t('auth_required_body') +
+      '</p>' + (msg ? '<p class="form-hint">' + msg + '</p>' : '') +
+      '<p class="form-hint">Firebase: usdt-reward-default-rtdb</p>';
+    gate.style.display = 'flex';
+  }
+
+  async function authenticate() {
+    var tgUser = null;
+    if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) tgUser = tg.initDataUnsafe.user;
+    if (!tgUser) {
+      // Device identity for browser preview only — zero balance in Firebase, not demo money
+      var params = new URLSearchParams(location.search);
+      var tid = params.get('tg_id');
+      if (!tid) {
+        throw Object.assign(new Error('Open via Telegram Mini App'), { code: 'AUTH_REQUIRED' });
+      }
+      tgUser = {
+        id: tid,
+        first_name: params.get('name') || null,
+        username: params.get('user') || null,
+        language_code: params.get('lang') || 'en'
+      };
+    }
+    await NEXORA_FB.ensureBootstrap();
+    var user = await NEXORA_FB.findOrCreateUser(tgUser, getRef());
+    state.user = user;
+    state.tid = user.telegram_id;
+    await NEXORA_FB.accrueProfits(state.tid);
+    state.stats = await NEXORA_FB.getStats(state.tid);
+    return true;
+  }
+
+  function bindUI() {
+    $$('.nav-item').forEach(function (btn) {
+      btn.addEventListener('click', function () { navigate(btn.dataset.page); });
+    });
+    $('#btnDeposit').addEventListener('click', openDepositModal);
+    $('#btnWithdraw').addEventListener('click', openWithdrawModal);
+    $('#btnMyInvHome').addEventListener('click', function () { navigate('investments'); });
+    $('#btnTxHome').addEventListener('click', function () { navigate('history'); });
+    $('#modalClose').addEventListener('click', closeModal);
+    $('#modalOverlay').addEventListener('click', function (e) { if (e.target === $('#modalOverlay')) closeModal(); });
+    $('#langSelect').addEventListener('change', async function (e) {
+      setLanguage(e.target.value);
+      sessionStorage.setItem('nx_lang', e.target.value);
+      renderPlans();
+      try { if (state.tid) await NEXORA_FB.setLanguage(state.tid, e.target.value); } catch (err) {}
+    });
+    $('#txChips').addEventListener('click', function (e) {
+      var chip = e.target.closest('.chip'); if (!chip) return;
+      $$('#txChips .chip').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      state.txFilter = chip.dataset.filter;
+      loadTransactions();
+    });
+    $('#btnCopyRef').addEventListener('click', function () { if (state._refLink) copyText(state._refLink); });
+    $('#btnShareRef').addEventListener('click', function () {
+      var link = state._refLink || '';
+      if (tg && tg.openTelegramLink) {
+        tg.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent('NEXORA — Smart Investment Platform'));
+      } else if (navigator.share) {
+        navigator.share({ title: 'NEXORA', url: link }).catch(function () { copyText(link); });
+      } else copyText(link);
+    });
+  }
+
+  async function init() {
+    var savedLang = sessionStorage.getItem('nx_lang') || 'en';
+    $('#langSelect').value = I18N[savedLang] ? savedLang : 'en';
+    setLanguage($('#langSelect').value);
+    bindUI();
+    try {
+      await authenticate();
+      updateBalanceUI();
+      await refreshDashboard();
+      if (state.user && state.user.language && I18N[state.user.language]) {
+        $('#langSelect').value = state.user.language;
+        setLanguage(state.user.language);
+      }
+    } catch (e) {
+      console.error(e);
+      showAuthGate(e.message);
+      if (e.code !== 'AUTH_REQUIRED') toast(e.message || t('something_wrong'), 'error');
+    } finally {
+      var ls = $('#loadingScreen');
+      if (ls) { ls.classList.add('hide'); setTimeout(function () { ls.remove(); }, 400); }
+    }
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3d2395e58d190d0',t:'MTc4OTc1NDE1Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
